@@ -1,0 +1,29 @@
+<div class="profile">
+    <section id="wrapper">
+        <header id="header">
+        {% if site.aboutPage %}
+            <a href="{{ "/" | relative_url  }}about">
+                <img id="avatar" class="2x" src="{{ "/" | relative_url  }}assets/images/avatar.jpg"/>
+            </a>
+        {% else %}
+            <img id="avatar" class="2x" src="{{ "/" | relative_url  }}assets/images/avatar.jpg"/>
+        {% endif %}
+            <h1>{{ site.author }}</h1>
+            <h2>{{ site.description }}</h2>
+            <div id="personal-links">
+            <a href="https://www.linkedin.com/in/{{site.personal_links.linkedin}}" target="_blank" rel="no-follow">
+                <i class="fa fa-linkedin-square"></i> 
+            </a>
+            <a href="https://github.com/{{site.personal_links.github}}" target="_blank" rel="no-follow">
+                <i class="fa fa-github-square"></i>
+            </a>
+            <a href="https://twitter.com/{{site.personal_links.twitter}}" target="_blank" rel="no-follow">
+                <i class="fa fa-twitter-square"></i>
+            </a>
+            <a href="https://instagram.com/{{site.personal_links.instagram}}" target="_blank" rel="no-follow">
+                <i class="fa fa-instagram"></i>
+            </a>
+            </div>
+        </header>
+    </section>
+</div>

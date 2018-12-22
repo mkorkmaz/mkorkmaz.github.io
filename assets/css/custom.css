@@ -1,0 +1,43 @@
+#personal-links {
+	margin-top: 20px;
+	font-size: 1.5rem	
+}
+
+#personal-links span{
+	font-size:0.9rem;
+}
+#personal-links a{
+	color:#999;
+}
+
+#post-list ul {
+  list-style: none;
+   list-style-type: none;
+}
+#post-list .post-list-date {
+	float:right;
+}
+
+#post-list .post-list-title {
+	float:left;
+}
+
+#post-meta .dark {
+	color: #999;
+	font-weight: 500;
+}
+
+#sharing {
+	margin-top:20px;
+}
+#wrapper {
+	max-width: 960px;
+}
+
+#post-list h2 {
+	max-width:100%;
+}
+#post-list, #archive-list
+{
+	margin-top: 40px;
+}
