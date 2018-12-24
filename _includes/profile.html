@@ -1,3 +1,15 @@
+<style>
+
+#ins:before {
+    content:"\f16d"
+}
+#tw:before {
+    content:"\f081"
+}
+#lkndn:before {
+    content:"\f08c"
+}
+</style>
 <div class="profile">
     <section id="wrapper">
         <header id="header">
@@ -12,16 +24,16 @@
             <h2>{{ site.description }}</h2>
             <div id="personal-links">
             <a href="https://www.linkedin.com/in/{{site.personal_links.linkedin}}" target="_blank" rel="no-follow">
-                <i class="fa fa-linkedin-square"></i> 
+                <i class="fa " id="lkndn"></i> 
             </a>
             <a href="https://github.com/{{site.personal_links.github}}" target="_blank" rel="no-follow" >
                 <i class="fa fa-github-square"></i>
             </a>
             <a href="https://twitter.com/{{site.personal_links.twitter}}" target="_blank" rel="no-follow">
-                <i class="fa fa-twitter-square"></i>
+                <i class="fa" id="tw"></i>
             </a>
             <a href="https://instagram.com/{{site.personal_links.instagram}}" target="_blank" rel="no-follow">
-                <i class="fa fa-instagram"></i>
+                <i class="fa"  id="ins"></i>
             </a>
             <a href="https://www.last.fm/user/dinosaur-act" target="_blank" rel="no-follow">
                 <i class="fa fa-lastfm-square"></i>
