@@ -49,6 +49,7 @@ form input, form textarea {
 	border: 1px solid #ddd;
 	color:#666;
 	font-size: 0.875rem;
+	font:0.9rem "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 form button {
