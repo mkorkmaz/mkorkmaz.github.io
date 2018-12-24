@@ -41,3 +41,36 @@
 {
 	margin-top: 40px;
 }
+
+form input, form textarea {
+	padding:10px;
+	width: 100%;
+	margin:10px;
+	border: 1px solid #ddd;
+	color:#666;
+	font-size: 0.875rem;
+}
+
+form button {
+	min-width: 1.625rem;
+	display: inline-block;
+	font-weight: 300;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	border: 1px solid #2f66b3;
+	letter-spacing: .03em;
+	padding: 0.25rem 0.5rem;
+	font-size: 0.75rem;
+	line-height: 1.33333333;
+	color: #fff;
+	background-color: #316cbe;
+	border-radius: 3px;
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+form button:hover {
+	color: #fff;
+	background-color: #316cbe;
+	border-color: #2f66b3;
+}

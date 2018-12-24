@@ -1,3 +1,6 @@
 <footer id="footer">
-    <p class="small">© Copyright {{ site.time | date: '%Y' }} {{ site.author }}</p>
+    <p class="small" style="float:left;">© Copyright {{ site.time | date: '%Y' }} {{ site.author }}</p>
+    <p style="float:right;">
+    	<a class="cta" href="{{ "/" | relative_url  }}feed.xml"><i class="fa fa-rss"></i></a>
+    </p>
 </footer>
