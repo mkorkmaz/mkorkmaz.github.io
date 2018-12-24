@@ -75,3 +75,8 @@ form button:hover {
 	background-color: #316cbe;
 	border-color: #2f66b3;
 }
+
+#personal-links * {
+	display:inline-block;
+}
+
