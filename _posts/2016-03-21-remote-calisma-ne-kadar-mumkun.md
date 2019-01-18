@@ -34,10 +34,13 @@ Bir arada olmayan insanlar en verimli çalışma imkanını tanıdığı iddias�
 
 Bu noktada uzaktan çalışmak isteyenlere naçizane tavsiyelerim şunlar olacaktır:
 
+
 - En fazla bir ya da iki ürün/servis geliştiren/yürüten bir firma ile çalışın.
 - "Bir personel aktif olarak tek bir projede çalışır" prensibiyle çalışan ve proje zaman/maliyet dengesini olması gerektiği gibi kurabilen yerler ile çalışın.
 - Her personelin bir "backup"ının olması gerektiğini düşünen yerler ile çalışın.
 - Freelancer olarak işi, olması gerektiği fiyata ve sizin şartlarınızla yetişebilecek sürede olması durumunda üstlenin.
 - İşi çıkaracak olan ekipteki zayıf halkalardan kurtulun.
+
+ &nbsp;
 
 Evet, ideal bir ortamda uzaktan çalışmak pek kolay görünmüyor, fakat ülkemizdeki durum kabaca bu şekilde görünüyor bana. Kimse kimseyi babasının hayrına çalıştırmıyor, kimse de babasının hayrına başkasına çalışmıyor. İstediğimiz gibi bir hayat sürdürmek için kendi şartlarımızı belirlememizde ve bu şartların hangisini, hangi koşullarda esnetebiliriz bunu belirleyip ona göre bir strateji belirlememizde fayda var.
