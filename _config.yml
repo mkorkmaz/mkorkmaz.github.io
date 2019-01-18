@@ -22,7 +22,7 @@ title: Personal Website of Mehmet Korkmaz
 author: Mehmet Korkmaz
 email: mehmet@mkorkmaz.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Developer @reformo and @efabrika. Coding since '97 but I'm neither a ninja nor guru nor junkie.
+  Developer @reformo and @efabrika. <br/>Coding since '97 but I'm neither a ninja nor guru nor junkie.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mkorkmaz.com" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -35,7 +35,7 @@ personal_links:
 
 google_analytics: 'UA-1479299-19'
 
-permalink: /:year/:title/
+permalink: /:categories/:year-:month-:day-:title/
 
 # Build settings
 markdown: kramdown
