@@ -44,6 +44,7 @@ highlighter: rouge
 plugins:
   - jekyll-feed
   - jekyll-font-awesome-sass
+  - jekyll-sitemap
 
 font-awesome:
   assets: true
