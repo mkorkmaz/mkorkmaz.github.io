@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 'MemSQL at First Sight'
-description: 'Promising MySQL Replacement'
+title: 'İlk Bakışta MemSQL'
+description: 'MemSQL at First Sight'
 tags: [Joy Of Coding, Turkish]
 categories: [joy-of-coding]
 ---
