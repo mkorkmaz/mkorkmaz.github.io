@@ -11,13 +11,13 @@ ReJSON-PHP is PHP Client for Redislabs' ReJSON Module. It supports both widely u
 
 To try ReJSON you can use Docker Image provided by Redislabs.
 
-```sh
+```bash
 docker run -p 6379:6379 redislabs/rejson:latest
 ```
 
 You will need PECL Redis Extension or Predis to use ReJSON-PHP. The recommended method to installing ReJSON-PHP is with composer.
 
-```sh
+```bash
 php composer require mkorkmaz/redislabs-rejson
 ```
 
