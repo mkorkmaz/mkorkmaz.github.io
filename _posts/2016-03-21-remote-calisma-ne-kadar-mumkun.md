@@ -3,7 +3,7 @@ layout: post
 title: '"Remote" Çalışma: Ne kadar mümkün?'
 description: 'Working Remotely'
 tags: [Joy Of Coding, Turkish]
-categories: [joy-of-coding]
+categories: [Joy of Coding]
 ---
 Yoğun tempoda çalışan bir insan yaşı biraz ilerleyince şöyle bir durup düşünüyor: Ben ne için, kimin için çalışıyorum? 
 

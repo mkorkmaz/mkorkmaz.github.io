@@ -17,6 +17,10 @@
 #post-list .post-list-date {
 	float:right;
 }
+#category-list {
+	max-width: 600px;
+	margin:0 auto;
+}
 
 #post-list .post-list-title {
 	float:left;
@@ -32,6 +36,10 @@
 }
 #wrapper {
 	max-width: 960px;
+}
+#wrapper.home {
+	max-width: 600px;
+
 }
 
 #post-list h2 {
@@ -78,5 +86,9 @@ form button:hover {
 
 #personal-links * {
 	display:inline-block;
+}
+
+.nav_categories {
+	text-transform: capitalize;
 }
 

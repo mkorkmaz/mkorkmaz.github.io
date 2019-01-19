@@ -1,6 +1,7 @@
 ---
 title: Contact
-permalink: contact/
+permalink: contact
+layout: default
 ---
 <article class="post" style="margin-top:10px;">
     <header>

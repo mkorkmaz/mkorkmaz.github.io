@@ -1,0 +1,26 @@
+<div id="category-list">
+{% for category in site.categories %}
+  {% if (category[0] | | downcase | url_escape | strip | replace: ' ', '-')  == page.slugified_title %}
+  <ul id="post-list" class="category-list">
+    {% assign pages_list = category[1] %}
+    {% for post in pages_list %}
+      {% if post.title != null %}
+      {% if group == null or group == post.group %}
+      <li>
+          <div>
+              <a href="{{ site.baseurl }}{{ post.url }}" class="post-list-date">
+                <aside class="dates">{{ post.date | date:"%Y/%m/%d" }}</aside>
+              </a>
+              <a href="{{ site.baseurl }}{{ post.url' }}" class="post-list-titke">{{ post.title }}</a>
+          </div>
+          <h2>{{ post.description }}</h2>
+      </li>
+      {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign pages_list = nil %}
+    {% assign group = nil %}
+  </ul>
+  {% endif %}
+{% endfor %}
+</div>

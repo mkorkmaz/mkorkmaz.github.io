@@ -3,7 +3,7 @@ layout: post
 title: 'Bulutta Uygulama Geliştirme'
 description: 'Programming in the Cloud'
 tags: [Joy Of Coding, Turkish]
-categories: [joy-of-coding]
+categories: [Joy of Coding]
 ---
 
 Hepimiz kendi çapında belli birtakım araçlar ile uygulama geliştirmekteyiz. Daha çok web tabanlı uygulama geliştiren bir kişi olarak klasik uygulama geliştirme "soft setup"ım şu şekilde:

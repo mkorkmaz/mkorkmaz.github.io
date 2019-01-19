@@ -3,7 +3,7 @@ layout: post
 title: 'İlk Bakışta MemSQL'
 description: 'MemSQL at First Sight'
 tags: [Joy Of Coding, Turkish]
-categories: [joy-of-coding]
+categories: [Joy of Coding]
 ---
 
 #### TL;DR English

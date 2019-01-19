@@ -45,6 +45,7 @@ plugins:
   - jekyll-feed
   - jekyll-font-awesome-sass
   - jekyll-sitemap
+  - jekyll-archives
 
 font-awesome:
   assets: true
@@ -52,7 +53,7 @@ font-awesome:
 defaults:
   -
     scope:
-      path: "" # empty string for all files
+      path: "_pages" # empty string for all files
       type: pages
     values:
       layout: default
