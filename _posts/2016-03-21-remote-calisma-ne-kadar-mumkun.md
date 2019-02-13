@@ -41,6 +41,4 @@ Bu noktada uzaktan çalışmak isteyenlere naçizane tavsiyelerim şunlar olacak
 - Freelancer olarak işi, olması gerektiği fiyata ve sizin şartlarınızla yetişebilecek sürede olması durumunda üstlenin.
 - İşi çıkaracak olan ekipteki zayıf halkalardan kurtulun.
 
- &nbsp;
-
 Evet, ideal bir ortamda uzaktan çalışmak pek kolay görünmüyor, fakat ülkemizdeki durum kabaca bu şekilde görünüyor bana. Kimse kimseyi babasının hayrına çalıştırmıyor, kimse de babasının hayrına başkasına çalışmıyor. İstediğimiz gibi bir hayat sürdürmek için kendi şartlarımızı belirlememizde ve bu şartların hangisini, hangi koşullarda esnetebiliriz bunu belirleyip ona göre bir strateji belirlememizde fayda var.

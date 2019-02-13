@@ -14,7 +14,6 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 name: Personal Website of Mehmet Korkmaz
-description: Blogging about stuffs
 meta_description: "Developer @reformo and @efabrika. Coding since '97 but I'm neither a ninja nor guru nor junkie."
 
 aboutPage: true

@@ -47,16 +47,68 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 margin-bottom: 20px;
 }
 
+
+@font-face {
+	font-family: BrandonText;
+	font-style: normal;
+	font-weight: 300;
+	src: url(./fonts/BrandonTextThin.otf) format('opentype');
+}
+
+@font-face {
+	font-family: BrandonText;
+	font-style: normal;
+	font-weight: 400;
+	src: url(./fonts/BrandonTextLight.otf) format('opentype');
+}
+
+@font-face {
+	font-family: BrandonText;
+	font-style: normal;
+	font-weight: 500;
+	src: url(./fonts/BrandonTextRegular.otf) format('opentype');
+}
+
+@font-face {
+	font-family: BrandonText;
+	font-style: normal;
+	font-weight: 600;
+	src: url(./fonts/BrandonTextMedium.otf) format('opentype');
+}
+
+@font-face {
+	font-family: BrandonText;
+	font-style: normal;
+	font-weight: 700;
+	src: url(./fonts/BrandonTextBold.otf) format('opentype');
+}
+
+@font-face {
+	font-family: BrandonText;
+	font-style: normal;
+	font-weight: 800;
+	src: url(./fonts/BrandonTextBlack.otf) format('opentype');
+}
+
+
+@font-face {
+	font-family: ReformoHeader;
+	src: url(./fonts/Brandon_reg.otf);
+}
+
 /* Base */
 html, body { height: 100%; }
 
 body {
-	font:16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font:16px/1 'BrandonText', sans-serif;
 	color: #666;
 	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
+	text-rendering: geometricPrecision;
+	background-color: #F6F9F9;
 }
-
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'ReformoHeader', sans-serif;
+}
 h1 {
 	font-size: 30px;
 	letter-spacing: -1px;
@@ -65,7 +117,7 @@ h1 {
 }
 
 h2 {
-	font: italic 19px/1.3em Georgia,serif;
+	font: italic 19px/1.3em BrandonText, Georgia,serif;
 	color: #bbb;
 }
 
@@ -100,11 +152,9 @@ h2 {
 
 .profile h2 {
 	font-size: 18px;
-	  font-weight: 300;
-	  color: #aaa;
+	  font-weight: 400;
+	  color: #999;
 	  margin-top: 10px;
-	  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	  font-style: normal;
 
 }
 
@@ -113,8 +163,6 @@ nav.main-nav {
 
 	/*max-width: 600px;*/
 	/*width:100%;*/
-	background: #fff;
-	background: rgba(255,255,255,.90);
 	margin: 0 auto;
 	text-align: right;
 	/*position: fixed;*/
@@ -126,9 +174,11 @@ nav.main-nav a {
 	right: 6px;
 	padding: 8px 12px;
 	color: #5badf0;
-	font-size: 13px;
+	font-size: 1rem;
+	font-family: BrandonText;
+	font-weight: 500;
 	/*font-weight: bold;*/
-	line-height: 1.35;
+	line-height: 1.65;
 	border-radius: 3px;
 
 }
@@ -182,11 +232,17 @@ a,
 	transition: all 0.15s ease;
 }
 
-ul 	{ margin:0; padding:0; }
-li	{ list-style-type:circle; list-style-position:inside; }
+ul 	{ margin:0; padding:0; margin-bottom: 20px; }
+li	{ list-style-type:circle; list-style-position:inside; line-height: 2;}
 
 /* Line Height */
-#post-body, p { line-height:1.7; }
+#post-body, p {
+	line-height: 1.85;
+	font-family: BrandonText;
+	font-weight:400;
+	color: #4a4a64;
+	font-size: 18px;
+}
 
 b, strong { font-weight: 500;
   color: #1E2025; }
@@ -229,30 +285,30 @@ em, i { font-style: italic; }
 .post h1 {
 	margin-bottom: 20px;
 	color: #222;
-	font: 300 32px/1.4em "Helvetica Neue", Helvetica,Arial,sans-serif;
+	font: 300 32px/1.4em "ReformoHeader", "Helvetica Neue", Helvetica,Arial,sans-serif;
 }
 
 .post h2 {
 	margin-bottom: 40px;
-	  font: 300 24px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif;
+	  font: 300 24px/1.5 "ReformoHeader","Helvetica Neue",Helvetica,Arial,sans-serif;
 	  color: #111;
 }
 
 
 .post h2.headline {
 	/*font: italic 22px/1.3em Georgia,serif;*/
-	font: normal 13px/1.5em "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font: normal 13px/1.5em "BrandonText", "Helvetica Neue",Helvetica,Arial,sans-serif;
 	margin: -5px 0 40px 0;
-	color: #b2b9be;
-	  font-size: 13px;
+	font-weight: 400;
+	color: #999;
 	  text-transform: uppercase;
-	  letter-spacing: 2px;
+	  letter-spacing: 1px;
 	  /*margin-top: 15px;*/
 	  display: inline-block;
 }
 
 #post-list h2 {
-	font: normal 17px/1.5em "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font: normal 17px/1.5em "BrandonText", "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #aaa;
 	max-width: 400px;
 	margin-top: 2px;
@@ -260,9 +316,9 @@ em, i { font-style: italic; }
 
 h3, h4, h5 { color:#333; }
 
-h3 { font-size:20px; font-weight: 400; }
+h3 { font-size:20px; font-weight: 400; font-family: BrandonText; }
 h4 { font-size:16px; font-weight:bold; }
-h5 { font-size:15px; font-weight: bold; }
+h5 { font-size:16px; font-family: BrandonText; font-weight: 400; }
 
 h6 {
 	font-size: 13px;
@@ -291,10 +347,10 @@ hr {
 	background: #eee;
 }
 
-span.code { font-family:Menlo, Monaco, Courier; background-color:#EEE; font-size:14px; }
+span.code { font-family: Menlo, Monaco, Courier; background-color:#EEE; font-size:14px; }
 
 pre	{
-	font-family:Menlo, Monaco, Courier;
+	font-family: Menlo, Monaco, Courier,  'Source Code Pro', monospace;;
 	white-space:pre-wrap;
 	/*border: 1px solid #ddd;*/
 	padding:20px;
@@ -303,7 +359,6 @@ pre	{
 	overflow:auto;
 	border-radius: 3px;
 	background: #272b2d;
-	  font-family: 'Source Code Pro',Menlo,monospace;
 	  font-size: 13px;
 	  line-height: 1.5em;
 	  font-weight: 500;
@@ -390,14 +445,14 @@ Post List
 #post-list a {
 	color: #333;
 	display: block;
-	font: bold 19px/1.7 "Helvetica Neue",helvetica,Arial,sans-serif;
+	font: 20px/1.7 "ReformoHeader", "Helvetica Neue",helvetica,Arial,sans-serif;
 }
 
 #post-list .dates {
 	float: right;
 	position: relative;
 	top: 1px;
-	font: 300 17px/1.8 "Helvetica Neue",helvetica,Arial,sans-serif;
+	font: 300 17px/1.8 "ReformoHeader", "Helvetica Neue",helvetica,Arial,sans-serif;
 	color: #bbb;
 }
 
@@ -444,13 +499,12 @@ Post List
 }
 
 #post-meta {
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 1.4;
+	font-family: BrandonText;
+	font-size: 16px;
 	border-top: 1px solid #eee;
 	padding-top: 40px;
 	margin-bottom: 40px;
-	padding-bottom: 40px;
+	padding-bottom: 30px;
 	margin-top: 40px;
 	color:#444;
 	border-bottom: 1px solid #eee;
@@ -463,8 +517,15 @@ Post List
 }
 
 #post-meta div span.dark {
-	color: #1E2025;
+	color: #666;
+	font-size: 15px !important;
+	font-weight: 400;
 
+}
+
+#post-meta div span.darker {
+	color: #666 !important;
+	font-weight: 400;
 }
 
 #post-meta div {
@@ -547,7 +608,7 @@ h1.archive {
 
 h2.month {
 	width: 100%;
-	font: bold 13px/1 "Helvetica Neue",helvetica,Arial,sans-serif;
+	font: bold 13px/1 "BrandonText","Helvetica Neue",helvetica,Arial,sans-serif;
 	text-transform: uppercase;
 	margin-top: 40px;
 	margin-bottom: 10px;
@@ -578,8 +639,8 @@ h2.month {
 }
 
 #post-meta img.avatar {
-  height: 36px;
-  width: 36px;
+  height: 64px;
+  width: 64px;
   float: left;
   border-radius: 50%;
   margin-top: 3px;
@@ -638,7 +699,7 @@ h2.month {
 	#post-list-footer { margin-top: 20px; padding-top: 40px; }
 
 	h1 { font-size: 26px; }
-	.post h2.headline { font-size: 13px; }
+	.post h2.headline { font-size: 12px; font-family: BrandonText !important; }
 	.post h1 { font-size:24px; }
 	.post h2 { font-size:20px; }
 }
