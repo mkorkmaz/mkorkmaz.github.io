@@ -5,6 +5,7 @@ description: 'Programming in the Cloud'
 date: 2011-09-01
 tags: [Joy Of Coding, Turkish]
 categories: [Joy of Coding]
+reading_time: "5-6 min."
 ---
 
 Hepimiz kendi çapında belli birtakım araçlar ile uygulama geliştirmekteyiz. Daha çok web tabanlı uygulama geliştiren bir kişi olarak klasik uygulama geliştirme "soft setup"ım şu şekilde:

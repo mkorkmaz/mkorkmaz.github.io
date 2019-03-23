@@ -5,6 +5,7 @@ description: 'MemSQL at First Sight'
 date: 2012-06-18
 tags: [Joy Of Coding, Turkish]
 categories: [Joy of Coding]
+reading_time: "4-5 min."
 ---
 
 #### TL;DR English

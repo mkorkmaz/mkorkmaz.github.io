@@ -5,6 +5,7 @@ description: 'Working Remotely'
 date: 2016-03-21
 tags: [Joy Of Coding, Turkish]
 categories: [Joy of Coding]
+reading_time: "4-5 min."
 ---
 Yoğun tempoda çalışan bir insan yaşı biraz ilerleyince şöyle bir durup düşünüyor: Ben ne için, kimin için çalışıyorum? 
 

@@ -8,6 +8,7 @@ archive: true
     <header>
         <h1>{{ page.title }}</h1>
         <h3 style="color:#999;">{{page.description}}</h3>
+
         <h5 style=" color:#999;">
             Article in {{ page.tags | join: ', '}}
         </h5>
@@ -16,7 +17,10 @@ archive: true
         </h2>
     </header>
     <section id="post-body">
-        {{content}}
+        <div style="margin-bottom:10px;color:#999;">[{{page.reading_time}}]</div>
+        <div>
+            {{content}}
+        </div>
     </section>
 </article>
 <footer id="post-meta" class="clearfix">

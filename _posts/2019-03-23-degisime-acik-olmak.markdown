@@ -5,6 +5,7 @@ description: "\"Embracing change\""
 date: 2019-03-23
 tags: [Agile, Turkish]
 categories: [Agile]
+reading_time: "3-4 min."
 ---
 
 
