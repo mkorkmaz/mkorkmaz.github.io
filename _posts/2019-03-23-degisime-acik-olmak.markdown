@@ -8,19 +8,19 @@ categories: [Agile]
 ---
 
 
-[Agile Manifesto](https://agilemanifesto.org/){:target="_blank"}'nun vurguladığı değerlerden biridir "**Responding to change _over_ following a plan**". Peki sabit bir planı uygulamaktansa "değişime cevap verebilmek" ya da başka bir deyişle "değişime açık olmak" bir geliştirici için ne ifade ediyor?
+[Agile Manifesto](https://agilemanifesto.org/){:target="_blank"}'nun vurguladığı değerlerden biridir "**Responding to change _over_ following a plan**". Peki sabit bir planı uygulamaktansa "değişime cevap verebilmek" ya da başka bir deyişle "değişime açık olmak", bir geliştirici için ne ifade ediyor?
 
 
-Günün sonunda hepimiz üzerinde çalıştığımız projenin ortaya çıkaracağı **_değeri_** görmek için çalışıyoruz. Değer, yerine göre, projeden projeye içeriği ve anlamı değişebilen bir kavram. Bazı projeler için paradır, bazı projeler için daha fazla etkileşimdir, bazı projeler için müşteri memnuniyetidir. 
+Günün sonunda, hepimiz üzerinde çalıştığımız projenin ortaya çıkaracağı **_değeri_** görmek için çalışıyoruz. Değer, yerine göre, projeden projeye içeriği ve anlamı değişebilen bir kavram. Bazı projeler için değer paradır, bazı projeler için daha fazla etkileşimdir, bazı projeler için müşteri memnuniyetidir. 
 
-Projeye dahil olan herkesin, proje sahibinden QA mühendisine kadar herkesin unutmaması gereken şey hepimiz üzerinde çalıştığımız projenin sonunda ortaya çıkacağı değer için çalışıyoruz. Para kazanmak, geçimimizi sağlamak, verilen görevi yapmış olmak, entelektüel haz almak vs gibi amaçlar için çalıştığımızı da söyleyebilir ve ona göre hareket edebilirsiniz ve başarısız olmaya aday bir projenin tabutuna bir çivi de siz çakarsınız. 
+Projeye dahil olan herkesin, proje sahibinden QA mühendisine kadar herkesin unutmaması gereken şey hepimiz üzerinde çalıştığımız projenin sonunda ortaya çıkacağı değer için çalışıyoruz. "Para kazanmak, geçimimizi sağlamak, verilen görevi yapmış olmak, entelektüel haz almak vs gibi amaçlar için çalıştığımızı" da söyleyebilir, ona göre hareket edebilir, ve başarısız olmaya aday bir projenin tabutuna bir çivi de siz çakarsınız. 
 
 
 Unutmayın, ancak ve ancak "**doğru işi doğru şekilde**" yaparsanız üzerinde çalıştığınız proje amaçlanan değere ulaşmaya yaklaşabilir. Diğer tüm kazanımlar bunun yan ürünüdür.
 
 "Doğru işi doğru yapmak" nedir? 
 
-_Doğru iş_, ortaya çıkan iş fikrinin ürün olarak son hali verildiğinde istenen şekilde olduğunu görebilmektir kısaca. Onu _doğru yapmak_ ise işin teknik kısımlarıdır, yani UX ve bilgi mimarisi süreçlerinde, tasarım süreçlerinde iş fikrini iyi yansıtacak şekilde ele almak, yazılım kısmında temiz mimari ve temiz kod prensiplerine uygun şekilde ürünü çıkarmaktır.
+_Doğru iş_, ortaya çıkan iş fikrinin ürün olarak son haline geldiğinde, istenen şekilde olduğunu görebilmektir kısaca. Onu _doğru yapmak_ ise işin teknik kısımlarıdır, yani UX ve bilgi mimarisi süreçlerinde, tasarım süreçlerinde iş fikrini iyi yansıtacak şekilde ele almak, yazılım kısmında temiz mimari ve temiz kod prensiplerine uygun şekilde ürünü çıkarmaktır.
 
 
 Buraya kadar hemfikir isek devam edebiliriz.
