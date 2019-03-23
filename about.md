@@ -20,7 +20,7 @@ layout: default
 - 2011 : Started to work with Viveka
 - 2013 : Started to work with Efabrika
 - 2016 : Married
-- 2017 : Became father of lovely girl
+- 2017 : Became father of a lovely girl
 
 
 During these years he has developed enterprise applications for:
