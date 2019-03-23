@@ -2,12 +2,10 @@
     {% for post in (site.posts | sort:date) limit:10 %}
         <li>
         	<div>
-            	<a href="{{ site.baseurl   }}{{ post.url | remove_first: '/' }}" class="post-list-date">
-            		<aside class="dates">{{ post.date | date:"%Y/%m/%d" }}</aside>
-            	</a>
+            	<aside class="dates"  style="color:#aaa;">{{ post.date | date:"%Y/%m/%d" }}</aside>
             	<a href="{{ site.baseurl   }}{{ post.url | remove_first: '/' }}" class="post-list-titke">{{ post.title }}</a>
         	</div>
-        	<aside class="dates">{{ post.tags | join: ", " }}</aside>
+        	<aside class="dates" style="color:#aaa;">{{ post.tags | join: ", " }}</aside>
 
         	<h2>{{ post.description }}</h2>
 
