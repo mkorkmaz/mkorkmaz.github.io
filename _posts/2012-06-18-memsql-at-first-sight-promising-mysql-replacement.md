@@ -2,6 +2,7 @@
 layout: post
 title: 'İlk Bakışta MemSQL'
 description: 'MemSQL at First Sight'
+date: 2012-06-18
 tags: [Joy Of Coding, Turkish]
 categories: [Joy of Coding]
 ---

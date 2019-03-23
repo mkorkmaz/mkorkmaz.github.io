@@ -2,6 +2,7 @@
 layout: post
 title: '"Remote" Çalışma: Ne kadar mümkün?'
 description: 'Working Remotely'
+date: 2016-03-21
 tags: [Joy Of Coding, Turkish]
 categories: [Joy of Coding]
 ---

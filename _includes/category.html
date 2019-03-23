@@ -1,9 +1,11 @@
 <div id="category-list">
 {% for category in site.categories %}
-  {% if (category[0] | | downcase | url_escape | strip | replace: ' ', '-')  == page.slugified_title %}
+{% assign category_slug = (category[0] |  downcase | url_escape | strip | replace: ' ', '-') %}
+  {% if category_slug  == page.slugified_title %}
   <ul id="post-list" class="category-list">
     {% assign pages_list = category[1] %}
-    {% for post in pages_list %}
+     {% assign sorted = pages_list | sort:date | reverse %}
+    {% for post in sorted %}
       {% if post.title != null %}
       {% if group == null or group == post.group %}
       <li>
@@ -13,6 +15,8 @@
               </a>
               <a href="{{ site.baseurl }}{{ post.url' }}" class="post-list-titke">{{ post.title }}</a>
           </div>
+                        <aside class="dates">{{ post.tags| join:", " }}</aside>
+
           <h2>{{ post.description }}</h2>
       </li>
       {% endif %}

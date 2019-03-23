@@ -2,6 +2,7 @@
 layout: post
 title: 'Bulutta Uygulama Geliştirme'
 description: 'Programming in the Cloud'
+date: 2011-09-01
 tags: [Joy Of Coding, Turkish]
 categories: [Joy of Coding]
 ---
