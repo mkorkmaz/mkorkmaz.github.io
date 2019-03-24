@@ -41,7 +41,7 @@ Bir geliştirici açısından bu bahsettiğimiz özgüveni en başta "**test yaz
 
 **Temiz kod** sadece göze hoş gelen kod yazmak anlamına gelmiyor tabi. [SOLID](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod){:target="_blank"} pattern'lerine bağlı, [STUPID](https://nikic.github.io/2011/12/27/Dont-be-STUPID-GRASP-SOLID.html){:target="_blank"} pattern'lerinden kaçınan bir yapı kurmak, [Defensive Programlama](https://ocramius.github.io/extremely-defensive-php/#/){:target="_blank"} konusunda duyarlı olmak, [Object Calisthenics](https://www.cs.helsinki.fi/u/luontola/tdd-2009/ext/ObjectCalisthenics.pdf){:target="_blank"} kurallarına riayet etmeye çalışmak bize yardımcı olacaktır.
 
-Bu bahsettiğim konular ışığında, değişimi özgüvenli bir şekilde "kucaklamamız" mümkün olacaktır diye düşünüyorum.
+Bu bahsettiğim konular ışığında, değişimi özgüvenli bir şekilde "kucaklamamız" mümkün olacaktır diye düşünüyorum. Test yazmayan ve temiz mimari ile temiz kodu tamamıyla gözardı eden bir anlayış ile "_Agile gitmek_" mümkün görünmüyor bana.
 
 "Bu projenin bir teslim tarihi var" diyen arkadaş, seni unutmadım, onu da daha sonra irdeleyeceğiz.
 
