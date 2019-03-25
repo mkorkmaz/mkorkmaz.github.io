@@ -60,6 +60,8 @@ Olmazsa olmaz bir teslim tarihi varsa, projeye en çok değer katan ve o tarihe 
 
 "_Geliştir - Geribildirim al -  Değiştir ve bir sonraki adıma geç_ döngüsü" ile ilerleyemeyecekseniz, yapılacakları yazılı halde iki taraf olarak onaylayın. Teslim tarihine kadar bunlara yeni maddeler eklenemeyeceğini kabul ettirin ve akabinde bunları yetiştirmeye çalışın. Buradaki en büyük sorun geribildirim almadan ilerlendiği için sürecin sonuda elde edilen "ürün" başta istenen de olsa arzulanan ürün olmama olasılığının yüksek olması.
 
+Bir geliştiricinin görevi teknik meselelerle uğraşmak olmalıdır, işi yürütme süreçlerini takip etmek değil.
+
 Evet, belirsizliği yönetmek kimin görevidir? Bence geliştiricilerin görevi olmadığı ortada.
 
 
