@@ -9,6 +9,8 @@ reading_time: "3-4 min."
 ---
 
 
+> “**Things do change. That's why we design and build with change in mind.**” <br>— Ron Jeffries
+
 [Agile Manifesto](https://agilemanifesto.org/){:target="_blank"}'nun vurguladığı değerlerden biridir "**Responding to change _over_ following a plan**". Peki sabit bir planı uygulamaktansa "değişime cevap verebilmek" ya da başka bir deyişle "değişime açık olmak", bir geliştirici için ne ifade ediyor?
 
 
