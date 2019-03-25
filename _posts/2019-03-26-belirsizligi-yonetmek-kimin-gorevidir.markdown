@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Belirsizliği yönetmek kimin görevidir?"
-description: "\"Who is responsible to manage the uncertainty?\""
+description: "\"Who is responsible for managing the uncertainty?\""
 date: 2019-03-26
 tags: [Agile, Turkish]
 categories: [Agile Johnny]
