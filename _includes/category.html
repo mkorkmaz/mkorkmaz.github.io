@@ -1,30 +1,30 @@
 <div id="category-list">
 {% for category in site.categories %}
-{% assign category_slug = (category[0] |  downcase | url_escape | strip | replace: ' ', '-') %}
-  {% if category_slug  == page.slugified_title %}
-  <ul id="post-list" class="category-list">
-    {% assign pages_list = category[1] %}
-     {% assign sorted = pages_list | sort:date | reverse %}
-    {% for post in sorted %}
-      {% if post.title != null %}
-      {% if group == null or group == post.group %}
-      <li>
-          <div>
-              
-                <aside class="dates"  style="color:#aaa;">{{ post.date | date:"%Y/%m/%d" }}</aside>
-              
-              <a href="{{ site.baseurl }}{{ post.url' }}" class="post-list-titke">{{ post.title }}</a>
-          </div>
-                        <aside class="dates"  style="color:#aaa;">{{ post.tags| join:", " }}</aside>
+	{% assign category_slug = (category[0] |  downcase | url_escape | strip | replace: ' ', '-') %}
+  	{% if category_slug  == page.slugified_title %}
+  	<ul id="post-list" class="category-list">
+    	{% assign pages_list = category[1] %}
+     	{% assign sorted = pages_list | sort:date | reverse %}
+    	{% for post in sorted %}
+      	{% if post.title != null %}
+	      	{% if group == null or group == post.group %}
+	      	<li>
+	          	<div>
+	              
+	          		<aside class="dates"  style="color:#aaa;">{{ post.date | date:"%Y/%m/%d" }}</aside>
+	              
+	              	<a href="{{ site.baseurl }}{{ post.url' }}" class="post-list-titke">{{ post.title }}</a>
+	          	</div>
+	            <aside class="dates"  style="color:#aaa;">{{ post.tags| join:", " }}</aside>
 
-          <h2>{{ post.description }}</h2>
-      </li>
-      {% endif %}
-      {% endif %}
-    {% endfor %}
-    {% assign pages_list = nil %}
-    {% assign group = nil %}
-  </ul>
-  {% endif %}
+	          	<h2>{{ post.description }}</h2>
+	     	</li>
+	      	{% endif %}
+      	{% endif %}
+    	{% endfor %}
+    	{% assign pages_list = nil %}
+    	{% assign group = nil %}
+ 	</ul>
+  	{% endif %}
 {% endfor %}
 </div>
