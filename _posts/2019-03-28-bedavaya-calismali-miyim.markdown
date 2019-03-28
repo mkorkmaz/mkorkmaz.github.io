@@ -2,7 +2,7 @@
 layout: post
 title:  "Bedavaya çalışmalı mıyım?"
 description: "\"Should I work for free?\""
-date: 2019-04-29
+date: 2019-04-28
 tags: [Joy of Coding, Turkish]
 categories: [Joy of Coding]
 reading_time: "4-5 min."
