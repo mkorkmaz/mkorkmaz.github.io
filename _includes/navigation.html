@@ -1,4 +1,4 @@
-<nav class="main-nav">
+<nav class="device-lg main-nav">
     {% if page.url != "/" %}
         <a href="{{site.baseurl}}/"> <span class="arrow">←</span> Home </a>
     {% endif %}
@@ -8,3 +8,15 @@
     <a href="{{site.baseurl}}/about">About </a>
     <a href="{{site.baseurl}}/contact">Contact </a>
 </nav>
+
+    <ul id="mobile-menu" class="device-sm">
+    	    
+   	{% if page.url != "/" %}
+        <li><a href="{{site.baseurl}}/"> <span class="arrow">←</span> Home </a></li>
+    {% endif %}
+		<li><a href="{{site.baseurl}}/joy-of-coding">Joy of Coding</a></li>
+		<li><a href="{{site.baseurl}}/agile-johnny">Agile Johnny</a></li>
+
+   		<li><a href="{{site.baseurl}}/about">About </a></li>
+    	<li><a href="{{site.baseurl}}/contact">Contact </a></li>
+    </ul>

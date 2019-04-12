@@ -92,3 +92,39 @@ form button:hover {
 	text-transform: capitalize;
 }
 
+.slicknav_menu {
+	display:none;
+}
+
+.slicknav_menu {
+	display:none;
+}
+
+.slicknav_menu {
+	background-color: #F6F9F9;
+}
+.slicknav_menu a {
+	color: #5694f1;
+	text-align:right;
+}
+.device-sm {
+	display: none;
+}
+@media screen and (max-width: 40em) {
+
+	.device-lg {
+		display: none;
+	}
+	#mobile-menu {
+		display:none;
+	}
+	
+	.slicknav_menu {
+		display: block;
+	}
+
+.device-sm {
+	display: block;
+}
+}
+
