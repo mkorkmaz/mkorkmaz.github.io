@@ -3,7 +3,7 @@ title: Contact
 permalink: contact
 layout: default
 ---
-<script src="https://www.google.com/recaptcha/api.js?render=6LdAH7MUAAAAAIJOLltYh7jki7kBsFsL9WtCE_l9"></script> 
+<script src="https://www.google.com/recaptcha/api.js"></script> 
 <style>
 .grecaptcha-badge {
   display: none;
@@ -22,7 +22,6 @@ layout: default
     <input type="email" name="email" required>
     Your Message
     <textarea name="message" rows="10" required></textarea>
-    <input type="hidden" id="captchaResponse" name="g-recaptcha-response" />
     <div class="g-recaptcha" data-sitekey="6LdAH7MUAAAAAIJOLltYh7jki7kBsFsL9WtCE_l9"></div>
     <div style="text-align:center;">
     <button type="submit" >Submit</button>
@@ -30,15 +29,6 @@ layout: default
 </form>
     </section>
 </article>
-
-<script>
-  grecaptcha.ready(function() {
-    grecaptcha.execute("6LdAH7MUAAAAAIJOLltYh7jki7kBsFsL9WtCE_l9", {action: "contact"})
-      .then(function(token) {
-        document.getElementById('captchaResponse').value = token;
-      });
-  });
-</script>
 
 {% include footer.html %}
 
