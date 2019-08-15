@@ -3,20 +3,27 @@ title: Contact
 permalink: contact
 layout: default
 ---
+<script src="https://www.google.com/recaptcha/api.js?render=6LdAH7MUAAAAAIJOLltYh7jki7kBsFsL9WtCE_l9"></script> 
+<style>
+.grecaptcha-badge {
+  display: none;
+}
+</style>
 <article class="post" style="margin-top:10px;">
     <header>
         <h1>Get in Touch</h1>
         <h2 class="headline">Feel free to ask questions.</h2>
     </header>
     <section id="post-body" style="text-align:center;" >
-    	<form action="https://getform.io/f/a49535eb-2adf-4273-bb5d-30c78773878c" method="POST" style="text-align:left;width:600px;margin:0 auto;">
-    
+    	<form action="https://getform.io/f/a49535eb-2adf-4273-bb5d-30c78773878c" method="POST" accept-charset="UTF-8"  style="text-align:left;width:600px;margin:0 auto;" enctype="multipart/form-data" target="_blank">
     Your Full Name
     <input type="text" name="name" required>
     Your E-mail Address
     <input type="email" name="email" required>
     Your Message
     <textarea name="message" rows="10" required></textarea>
+    <input type="hidden" id="captchaResponse" name="g-recaptcha-response" />
+    <div class="g-recaptcha" data-sitekey="6LdAH7MUAAAAAIJOLltYh7jki7kBsFsL9WtCE_l9"></div>
     <div style="text-align:center;">
     <button type="submit" >Submit</button>
     </div>
@@ -24,7 +31,14 @@ layout: default
     </section>
 </article>
 
-
+<script>
+  grecaptcha.ready(function() {
+    grecaptcha.execute("6LdAH7MUAAAAAIJOLltYh7jki7kBsFsL9WtCE_l9", {action: "contact"})
+      .then(function(token) {
+        document.getElementById('captchaResponse').value = token;
+      });
+  });
+</script>
 
 {% include footer.html %}
 
