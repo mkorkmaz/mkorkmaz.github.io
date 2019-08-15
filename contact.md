@@ -22,7 +22,7 @@ layout: default
     <input type="email" name="email" required>
     Your Message
     <textarea name="message" rows="10" required></textarea>
-    <div class="g-recaptcha" data-sitekey="6LdAH7MUAAAAAIJOLltYh7jki7kBsFsL9WtCE_l9"></div>
+    <div class="g-recaptcha" data-sitekey="6LceILMUAAAAAJdD_-og0oyg1HsrT1eHANhPATwW"></div>
     <div style="text-align:center;">
     <button type="submit" >Submit</button>
     </div>
