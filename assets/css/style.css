@@ -100,14 +100,14 @@ margin-bottom: 20px;
 html, body { height: 100%; }
 
 body {
-	font:16px/1 'Source Sans Pro', /*'BrandonText',*/ 'Helvetica Neue', Helvetica, sans-serif;
+	font: 16px/1 Muli, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	color: #666;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: geometricPrecision;
 	background-color: #F6F9F9;
 }
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Source Sans Pro', /*'ReformoHeader',*/ sans-serif;
+	font-family: Muli, /*'ReformoHeader',*/ sans-serif;
 }
 h1 {
 	font-size: 30px;
@@ -117,7 +117,7 @@ h1 {
 }
 
 h2 {
-	font: italic 19px/1.3em 'Source Sans Pro',/* BrandonText,*/ Georgia,serif;
+	font: italic 19px/1.3em Muli,/* BrandonText,*/ Georgia,serif;
 	color: #bbb;
 }
 
@@ -146,12 +146,12 @@ h2 {
 .profile h1 {
 	font-weight: 400;
 	letter-spacing: 0px;
-	font-size: 20px;
+	font-size: 18px;
 	color: #222;
 }
 
 .profile h2 {
-	font-size: 18px;
+	font-size: 16px;
 	  font-weight: 400;
 	  color: #999;
 	  margin-top: 10px;
@@ -175,7 +175,7 @@ nav.main-nav a {
 	padding: 8px 12px;
 	color: #5badf0;
 	font-size: 1rem;
-	font-family: 'Source Sans Pro' ; /*BrandonText;*/
+	font-family: Muli ; /*BrandonText;*/
 	font-weight: 500;
 	/*font-weight: bold;*/
 	line-height: 1.65;
@@ -238,10 +238,10 @@ li	{ list-style-type:circle; list-style-position:inside; line-height: 2;}
 /* Line Height */
 #post-body, p {
 	line-height: 1.85;
-	font-family: 'Source Sans Pro'; /*BrandonText;*/
+	font-family: Muli; /*BrandonText;*/
 	font-weight: 300;
 	color: #4a4a64;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 b, strong { font-weight: 500;
@@ -285,19 +285,19 @@ em, i { font-style: italic; }
 .post h1 {
 	margin-bottom: 20px;
 	color: #222;
-	font: 300 32px/1.4em 'Source Sans Pro', /*"ReformoHeader",*/ "Helvetica Neue", Helvetica,Arial,sans-serif;
+	font: 300 32px/1.4em Muli, /*"ReformoHeader",*/ "Helvetica Neue", Helvetica,Arial,sans-serif;
 }
 
 .post h2 {
 	margin-bottom: 40px;
-	  font: 300 24px/1.5 'Source Sans Pro', /*"ReformoHeader",*/ ,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	  font: 300 24px/1.5 Muli, /*"ReformoHeader",*/ ,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	  color: #111;
 }
 
 
 .post h2.headline {
 	/*font: italic 22px/1.3em Georgia,serif;*/
-	font: normal 13px/1.5em  'Source Sans Pro', /*"BrandonText",*/ "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font: normal 13px/1.5em  Muli, /*"BrandonText",*/ "Helvetica Neue",Helvetica,Arial,sans-serif;
 	margin: -5px 0 40px 0;
 	font-weight: 400;
 	color: #999;
@@ -308,7 +308,7 @@ em, i { font-style: italic; }
 }
 
 #post-list h2 {
-	font: normal 17px/1.5em 'Source Sans Pro', /*"BrandonText",*/ "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font: normal 14px/1.5em Muli, /*"BrandonText",*/ "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #aaa;
 	max-width: 400px;
 	margin-top: 2px;
@@ -316,9 +316,9 @@ em, i { font-style: italic; }
 
 h3, h4, h5 { color:#333; }
 
-h3 { font-size:20px; font-weight: 400; font-family: 'Source Sans Pro' /*"BrandonText",*/ ; }
+h3 { font-size:20px; font-weight: 400; font-family: Muli /*"BrandonText",*/ ; }
 h4 { font-size:16px; font-weight:bold; }
-h5 { font-size:16px; font-family: 'Source Sans Pro' /*"BrandonText",*/ ; font-weight: 400; }
+h5 { font-size:16px; font-family: Muli /*"BrandonText",*/ ; font-weight: 400; }
 
 h6 {
 	font-size: 13px;
@@ -445,14 +445,14 @@ Post List
 #post-list a {
 	color: #333;
 	display: block;
-	font: 20px/1.7 'Source Sans Pro', /*"ReformoHeader",*/ "Helvetica Neue",helvetica,Arial,sans-serif;
+	font: 18px/1.7 Muli, /*"ReformoHeader",*/ "Helvetica Neue",helvetica,Arial,sans-serif;
 }
 
 #post-list .dates {
 	float: right;
 	position: relative;
 	top: 1px;
-	font: 300 17px/1.8 'Source Sans Pro', /*"ReformoHeader",*/ "Helvetica Neue",helvetica,Arial,sans-serif;
+	font: 300 14px/1.8 Muli, /*"ReformoHeader",*/ "Helvetica Neue",helvetica,Arial,sans-serif;
 	color: #bbb;
 }
 
@@ -499,7 +499,7 @@ Post List
 }
 
 #post-meta {
-	font-family: 'Source Sans Pro'; /*BrandonText;*/
+	font-family: Muli; /*BrandonText;*/
 	font-size: 16px;
 	line-height: 1.4;
 	border-top: 1px solid #eee;
@@ -609,7 +609,7 @@ h1.archive {
 
 h2.month {
 	width: 100%;
-	font: bold 13px/1 'Source Sans Pro', /*BrandonText", */ "Helvetica Neue",helvetica,Arial,sans-serif;
+	font: bold 13px/1 Muli, /*BrandonText", */ "Helvetica Neue",helvetica,Arial,sans-serif;
 	text-transform: uppercase;
 	margin-top: 40px;
 	margin-bottom: 10px;
@@ -623,7 +623,7 @@ h2.month {
 
 #archive-list a {
 	display: block;
-	font: bold 17px/1.7 'Source Sans Pro',"Helvetica Neue",helvetica,Arial,sans-serif;
+	font: bold 17px/1.7 Muli,"Helvetica Neue",helvetica,Arial,sans-serif;
 	color: #333;
 }
 
@@ -631,7 +631,7 @@ h2.month {
 	float: right;
 	position: relative;
 	top: 1px;
-	font: 300 17px/1.7 'Source Sans Pro',"Helvetica Neue",helvetica,Arial,sans-serif;
+	font: 300 17px/1.7 Muli,"Helvetica Neue",helvetica,Arial,sans-serif;
 	color: #bbb;
 }
 
@@ -651,12 +651,12 @@ h2.month {
 
 #post-list.archive.readmore h3{
 
-	  font: 400 20px 'Source Sans Pro',"Helvetica Neue", Helvetica,Arial,sans-serif;
+	  font: 400 20px Muli,"Helvetica Neue", Helvetica,Arial,sans-serif;
 	  margin-bottom: 30px;
 }
 
 #post-list.archive.readmore a{
-	font: 400 16px/1.6 'Source Sans Pro',"Helvetica Neue",helvetica,Arial,sans-serif;
+	font: 400 16px/1.6 Muli,"Helvetica Neue",helvetica,Arial,sans-serif;
 	color: #5694f1;
 }
 
@@ -665,7 +665,7 @@ h2.month {
 }
 
 #post-list.archive.readmore .dates{
-	font: 300 16px/1.6 'Source Sans Pro',"Helvetica Neue",helvetica,Arial,sans-serif;
+	font: 300 16px/1.6 Muli,"Helvetica Neue",helvetica,Arial,sans-serif;
 }
 #sharing a.facebook {
   background: #4361b3;
@@ -700,7 +700,7 @@ h2.month {
 	#post-list-footer { margin-top: 20px; padding-top: 40px; }
 
 	h1 { font-size: 26px; }
-	.post h2.headline { font-size: 12px; font-family: 'Source Sans Pro' /*BrandonText*/ !important; }
+	.post h2.headline { font-size: 12px; font-family: Muli /*BrandonText*/ !important; }
 	.post h1 { font-size:24px; }
 	.post h2 { font-size:20px; }
 }
