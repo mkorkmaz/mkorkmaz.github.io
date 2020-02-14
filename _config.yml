@@ -38,6 +38,15 @@ permalink: /:year/:month/:title
 
 # Build settings
 markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: php
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
 theme: minima
 highlighter: rouge
 plugins:
