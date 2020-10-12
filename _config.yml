@@ -21,7 +21,7 @@ title: Personal Website of Mehmet Korkmaz
 author: Mehmet Korkmaz
 email: mehmet@mkorkmaz.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Practitioner and developer <a href="https://reformo.net" target="_blank">@reformo</a> and <a href="https://efabrika.com" target="_blank">@efabrika</a>. <br/>Coding since '97 but I'm neither a ninja nor guru nor junkie.
+  Practitioner and developer <a href="https://reformo.net" target="_blank">@reformo</a>. <br/>Coding since '97 but I'm neither a ninja nor guru nor junkie.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mkorkmaz.com" # the base hostname & protocol for your site, e.g. http://example.com
 
