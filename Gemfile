@@ -32,3 +32,4 @@ gem 'jekyll-font-awesome-sass'
 
 gem 'jekyll-sitemap'
 gem 'jekyll-paginate'
+
