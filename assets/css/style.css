@@ -56,6 +56,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: geometricPrecision;
 	background-color: #F6F9F9;
+
 }
 
 h1 {
@@ -130,7 +131,6 @@ nav.main-nav a {
 	padding: 8px 12px;
 	color: #5badf0;
 	font-size: 1rem;
-	font-family: Muli ; /*BrandonText;*/
 	font-weight: 500;
 	/*font-weight: bold;*/
 	line-height: 1.65;
@@ -193,7 +193,6 @@ li	{ list-style-type:circle; list-style-position:inside; line-height: 2;}
 /* Line Height */
 #post-body, p {
 	line-height: 1.85;
-	font-family: Muli; /*BrandonText;*/
 	font-weight: 300;
 	color: #4a4a64;
 	font-size: 16px;
@@ -300,10 +299,10 @@ hr {
 	background: #eee;
 }
 
-span.code { font-family: Consolas, Menlo, Monaco, Courier; background-color:#EEE; font-size:14px; }
+span.code { font-family: Menlo, Monaco, Consolas, Courier; background-color:#EEE; font-size:14px; }
 
 pre	{
-	font-family: Consolas, Menlo, Monaco, Courier, monospace;;
+	font-family: Menlo, Monaco, Consolas, Courier, monospace;;
 	white-space:pre-wrap;
 	/*border: 1px solid #ddd;*/
 	padding:10px;
@@ -476,7 +475,6 @@ Post List
 }
 
 #post-meta {
-	font-family: Muli; /*BrandonText;*/
 	font-size: 16px;
 	line-height: 1.4;
 	border-top: 1px solid #eee;
@@ -632,13 +630,14 @@ h2.month {
 
 #post-list.archive.readmore h3{
 
-	  font: 400 20px Muli,"Helvetica Neue", Helvetica,Arial,sans-serif;
+	  font-size:  20px;
+	  font-weight: 400;
 	  margin-bottom: 30px;
 }
 
 #post-list.archive.readmore a{
-	font: 400 16px/1.6 Muli,"Helvetica Neue",helvetica,Arial,sans-serif;
-	color: #5694f1;
+	  font-size:  16px;
+	  font-weight: 400;
 }
 
 #post-list.archive.readmore a:hover{
@@ -646,7 +645,8 @@ h2.month {
 }
 
 #post-list.archive.readmore .dates{
-	font: 300 16px/1.6 Muli,"Helvetica Neue",helvetica,Arial,sans-serif;
+		  font-size:  16px;
+	  font-weight: 400;
 }
 #sharing a.facebook {
   background: #4361b3;
@@ -681,7 +681,7 @@ h2.month {
 	#post-list-footer { margin-top: 20px; padding-top: 40px; }
 
 	h1 { font-size: 26px; }
-	.post h2.headline { font-size: 12px; font-family: Muli /*BrandonText*/ !important; }
+	.post h2.headline { font-size: 12px; }
 	.post h1 { font-size:24px; }
 	.post h2 { font-size:20px; }
 }
