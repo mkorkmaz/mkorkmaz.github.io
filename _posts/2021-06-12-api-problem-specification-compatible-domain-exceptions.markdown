@@ -65,7 +65,7 @@ throw new \InvalidArgumentException(sprintf('Email is not a valid email address:
   "exception": {
     "class": "InvalidArgumentException",
     "code": 400,
-    "message": "Email is not a valid email address",
+    "message": "Email is not a valid email address: mehmet@mkorkmaz.com",
     "file": "/opt/app/src/Infrastructure/Ui/PrivateApi/IdentityAndAccess/Handler/RegisterAccount.php",
     "line": 47,
     "trace": [
@@ -75,7 +75,7 @@ throw new \InvalidArgumentException(sprintf('Email is not a valid email address:
   "title": "Bad Request",
   "type": "https://httpstatus.es/400",
   "status": 400,
-  "detail": "Email is not a valid email address"
+  "detail": "Email is not a valid email address: mehmet@mkorkmaz.com"
 
 {% endhighlight %}
 
