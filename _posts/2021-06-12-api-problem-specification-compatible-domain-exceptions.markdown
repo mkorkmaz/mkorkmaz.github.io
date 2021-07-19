@@ -89,7 +89,7 @@ But I have problems with this output.
 * Since this response is for clients, I don't want to share some internal information in "trace" and other places. I can use an error handler to log this internal information, then return the api problem error response.
 
 
-Because in my "domain code" I throw lots of informative exceptions and I want my error responses use these informations.
+Since in my "domain code" I throw lots of informative exceptions and I want my error responses use these informations.
 
 ProblemDetailsMiddleware provides a trait named CommonProblemDetailsExceptionTrait but it only handles exception internal data to api problem error response data transformation. I need an another trait that helps to create an exception and use its internal data for api problem error responses.
 
