@@ -5,7 +5,7 @@ description: "Making your domain exceptions work with your api problem library<b
 date: 2021-06-12
 tags: [Joy of Coding, English]
 categories: [Joy of Coding]
-reading_time: "4-5 min."
+reading_time: "10 min."
 ---
 
 
