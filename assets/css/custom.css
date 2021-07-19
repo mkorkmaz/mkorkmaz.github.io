@@ -18,7 +18,7 @@
 	float:right;
 }
 #category-list {
-	max-width: 600px;
+	max-width: 800px;
 	margin:0 auto;
 }
 
@@ -37,19 +37,27 @@
 #wrapper {
 	max-width: 800px;
 }
+
 #wrapper.home {
-	max-width: 600px;
+	max-width: 800px;
 
 }
 
 #post-list h2 {
 	max-width:100%;
 }
-#post-list, #archive-list
-{
+
+#post-list, #archive-list{
 	margin-top: 40px;
 }
-
+sup {
+	vertical-align:super;  
+font-size: small;  
+}
+li {
+	list-style-type: disc;
+	margin-bottom:  1rem;
+}
 form input, form textarea {
 	padding:10px;
 	width: 100%;
