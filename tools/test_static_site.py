@@ -24,10 +24,13 @@ BLOG_ROUTES = [
     "/2011/09/programming-in-the-cloud",
 ]
 JOURNAL_ROUTES = [
-    "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insan-yonu",
+    "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insani-yonu",
 ]
 ARTICLE_ROUTES = JOURNAL_ROUTES + BLOG_ROUTES
 PAGE_ROUTES = ["/", "/about", "/journal", "/blog", "/contact", "/joy-of-coding", "/agile-johnny", "/404"]
+REDIRECT_ROUTES = {
+    "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insan-yonu": JOURNAL_ROUTES[0],
+}
 
 
 class PageDocument(HTMLParser):
@@ -62,15 +65,18 @@ class StaticSiteTest(unittest.TestCase):
         cls.thread.join()
 
     def test_routes_preserve_the_original_addresses_and_metadata(self):
-        for route in PAGE_ROUTES + ARTICLE_ROUTES:
+        for route in PAGE_ROUTES + ARTICLE_ROUTES + list(REDIRECT_ROUTES):
             with self.subTest(route=route):
                 path = resolvePublishedFile(ROOT, route)
                 self.assertIsNotNone(path)
                 document = PageDocument(path)
-                canonicalRoute = "/" if route == "/about" else route
+                canonicalRoute = REDIRECT_ROUTES.get(route, "/" if route == "/about" else route)
                 self.assertEqual([{"rel": "canonical", "href": "https://mkorkmaz.com" + canonicalRoute}], document.select("link", rel="canonical"))
-                language = "tr" if route in JOURNAL_ROUTES + BLOG_ROUTES[1:] else "en"
+                language = "tr" if route in JOURNAL_ROUTES + BLOG_ROUTES[1:] + list(REDIRECT_ROUTES) else "en"
                 self.assertEqual(language, document.select("html")[0]["lang"])
+                if route in REDIRECT_ROUTES:
+                    self.assertEqual([{"http-equiv": "refresh", "content": "0; url=" + canonicalRoute}], document.select("meta", **{"http-equiv": "refresh"}))
+                    self.assertEqual(1, len(document.select("a", href=canonicalRoute)))
                 address = f"http://127.0.0.1:{self.server.server_port}{route}"
                 with urlopen(address, timeout=5) as response:
                     self.assertEqual(200, response.status)
@@ -78,8 +84,8 @@ class StaticSiteTest(unittest.TestCase):
                     self.assertEqual(path.read_bytes(), response.read())
 
     def test_all_pages_are_complete_html_without_template_processing(self):
-        self.assertEqual(len(PAGE_ROUTES + ARTICLE_ROUTES), len(list(ROOT.glob("*.html"))) + len(list(ROOT.glob("20*/*/*.html"))))
-        for route in PAGE_ROUTES + ARTICLE_ROUTES:
+        self.assertEqual(len(PAGE_ROUTES + ARTICLE_ROUTES) + len(REDIRECT_ROUTES), len(list(ROOT.glob("*.html"))) + len(list(ROOT.glob("20*/*/*.html"))))
+        for route in PAGE_ROUTES + ARTICLE_ROUTES + list(REDIRECT_ROUTES):
             path = resolvePublishedFile(ROOT, route)
             source = path.read_text()
             self.assertTrue(source.startswith("<!DOCTYPE html>"), path)
@@ -91,7 +97,7 @@ class StaticSiteTest(unittest.TestCase):
             self.assertTrue(all("alt" in values for values in document.select("img")), path)
 
     def test_internal_navigation_and_assets_resolve(self):
-        for route in PAGE_ROUTES + ARTICLE_ROUTES:
+        for route in PAGE_ROUTES + ARTICLE_ROUTES + list(REDIRECT_ROUTES):
             document = PageDocument(resolvePublishedFile(ROOT, route))
             for _, attributes in document.elements:
                 for name in ("href", "src"):
