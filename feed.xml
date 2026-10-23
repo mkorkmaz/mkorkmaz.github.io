@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Personal Website of Mehmet Korkmaz</title>
-    <description>Practitioner and developer &lt;a href=&quot;https://reformo.net&quot; target=&quot;_blank&quot;&gt;@reformo&lt;/a&gt;. &lt;br/&gt;Coding since &apos;97 but I&apos;m neither a ninja nor guru nor junkie.</description>
-    <link>https://mkorkmaz.com</link>
+    <description>Product Engineer &lt;a href=&quot;https://reformo.net&quot; target=&quot;_blank&quot;&gt;@reformo&lt;/a&gt;. &lt;br/&gt;Coding since &apos;97 but I&apos;m neither a ninja nor guru nor junkie.</description>
+    <link>https://mkorkmaz.com/blog</link>
     <atom:link href="https://mkorkmaz.com/feed.xml" rel="self" type="application/rss+xml" />
 
       <item>
