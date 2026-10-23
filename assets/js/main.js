@@ -33,14 +33,4 @@ function retina() {
 	});
 };
  
-function validateRecaptcha() {
-  var response = grecaptcha.getResponse();
-  if (response.length === 0) {
-    alert("Not validated");
-    return false;
-  } else {
-    return true;
-  }
-}
-
 $(document).ready(retina);

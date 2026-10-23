@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API-Problem Specification Compatible Domain Exceptions -  Personal Website of Mehmet Korkmaz</title>
+  <link rel="canonical" href="https://mkorkmaz.com/2021/06/api-problem-specification-compatible-domain-exceptions">
+  <meta name="description" content="Making your domain exceptions work with your api problem library(RFC7807 Problem Details for HTTP APIs)" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@_mehmet_korkmaz" />
+  <meta name="twitter:creator" content="@_mehmet_korkmaz" />
+  <meta property="twitter:image" content="https://mkorkmaz.com/assets/images/avatar.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+
+  <meta property="og:url" content="https://mkorkmaz.com/2021/06/api-problem-specification-compatible-domain-exceptions" />
+  <meta property="og:title" content="API-Problem Specification Compatible Domain Exceptions -  Personal Website of Mehmet Korkmaz" />
+  <meta property="og:description" content="Making your domain exceptions work with your api problem library(RFC7807 Problem Details for HTTP APIs)" />
+  <meta property="og:image" content="https://mkorkmaz.com/assets/images/avatar.jpg" />
+
+  <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/slicknav.min.css" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=2020021402">
+  <link rel="stylesheet" href="/assets/css/custom.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+</head>
+<body>
+
+  <nav class="device-lg main-nav">
+
+        <a href="/"> <span class="arrow">←</span> Home </a>
+
+    <a href="/joy-of-coding">Joy of Coding</a>
+        <a href="/agile-johnny">Agile Johnny</a>
+
+    <a href="/about">About </a>
+    <a href="/contact">Contact </a>
+</nav>
+
+    <ul id="mobile-menu" class="device-sm">
+
+
+        <li><a href="/"> <span class="arrow">←</span> Home </a></li>
+
+        <li><a href="/joy-of-coding">Joy of Coding</a></li>
+        <li><a href="/agile-johnny">Agile Johnny</a></li>
+
+        <li><a href="/about">About </a></li>
+        <li><a href="/contact">Contact </a></li>
+    </ul>
+
+
+
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>API-Problem Specification Compatible Domain Exceptions</h1>
+        <h3 style="color:#666;">Making your domain exceptions work with your api problem library<br/>(RFC7807 Problem Details for HTTP APIs)</h3>
+
+        <h5 style=" color:#666;">
+            Article in Joy of Coding, English
+        </h5>
+        <h6>
+            June 12, 2021
+        </h6>
+    </header>
+    <section id="post-body">
+        <div style="margin-bottom:10px;color:#666;">[10 min.]</div>
+        <div>
+            <p>RFC7807 Problem Details Specification “defines a ‘problem detail’ as a way to carry machine-readable details of errors in a HTTP response to avoid the need to define new error response formats for HTTP APIs.” <sup><a href="#references-1">[1]</a></sup></p>
+
+<p>If you don’t know the API-Problem Specification and/or want to learn more about it, you can read this article by Guy Levin: <a href="https://blog.restcase.com/rest-api-error-handling-problem-details-response/" target="_blank">REST API Error Handling - Problem Details Response</a></p>
+
+<p>In this article, I try to cover how I handle domain exceptions and return api problem formatted http response in a <a href="https://docs.mezzio.dev/" target="_blank">Mezzio</a> app, but you will get the general idea.</p>
+
+<p>Mezzio enables you to create middleware applications. A middleware is executed between request and response, and accepts a request object and returns a response object.</p>
+
+<p>Typical middleware stack with handling api-problem details is shown below.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="code"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="n">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="kn">use</span> <span class="nc">Mezzio\Application</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Mezzio\MiddlewareFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Mezzio\ProblemDetails\ProblemDetailsMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Mezzio\Router\Middleware\DispatchMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Mezzio\Router\Middleware\RouteMiddleware</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Mezzio\Handler\NotFoundHandler</span><span class="p">;</span>
+
+
+<span class="k">return</span> <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Application</span> <span class="nv">$app</span><span class="p">,</span> <span class="kt">MiddlewareFactory</span> <span class="nv">$factory</span><span class="p">,</span> <span class="kt">ContainerInterface</span> <span class="nv">$container</span><span class="p">)</span> <span class="p">:</span> <span class="kt">void</span> <span class="p">{</span>
+
+    <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">pipe</span><span class="p">(</span><span class="nc">ProblemDetailsMiddleware</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+    <span class="mf">...</span>
+    <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">pipe</span><span class="p">(</span><span class="nc">RouteMiddleware</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+    <span class="mf">...</span>
+    <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">pipe</span><span class="p">(</span><span class="nc">DispatchMiddleware</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+    <span class="mf">...</span>
+    <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">pipe</span><span class="p">(</span><span class="nc">NotFoundHandler</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>In this stack, <a href="https://docs.mezzio.dev/mezzio-problem-details/" target="_blank">ProblemDetailsMiddleware</a> provides a middleware that catches the last thrown exception and returns JSON error response that implements API-Problem Specification.</p>
+
+<p>Let’s say an endpoint accepts an email and stores it, but email is not a valid email address, then throws InvalidArgumentException. With ProblemDetailsMiddleware, response is like this.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="k">throw</span> <span class="k">new</span> <span class="err">\</span><span class="nf">InvalidArgumentException</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'Email is not a valid email address: %s'</span><span class="p">,</span> <span class="nv">$payload</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]),</span> <span class="mi">400</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"exception"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"InvalidArgumentException"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email is not a valid email address: mehmet@mkorkmaz.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/opt/app/src/Infrastructure/Ui/PrivateApi/IdentityAndAccess/Handler/RegisterAccount.php"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"line"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trace"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bad Request"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://httpstatus.es/400"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email is not a valid email address: mehmet@mkorkmaz.com"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>But I have problems with this output.</p>
+
+<ul>
+  <li>HTTP status code is set using thrown exception’s code, but I need different status code and error code. i.e. I want to return “404” as HTTP status and “users/user-not-found” as error code, so an API client can use the “users/user-not-found” to implement multilingual warning messages.</li>
+  <li>I want to set custom url for “type”. For example: https://my-awesome-api-url.com/docs/errors/users/user-not-found</li>
+  <li>I want to set “title”. For example “User Not Found” instead of “Not Found”.</li>
+  <li>I want to provide “additional” data with it. For example {“rateLimit”: 300, “totalRequestsLastHour”: 128 }</li>
+  <li>Since this response is for clients, I don’t want to share some internal information in “trace” and other places. I can use an error handler to log this internal information, then return the api problem error response.</li>
+</ul>
+
+<p>Since in my “domain code” I throw lots of informative exceptions, I want my error responses use these informations.</p>
+
+<p>ProblemDetailsMiddleware provides a trait named CommonProblemDetailsExceptionTrait but it only handles exception’s internal data to api problem error response data transformation. I need an another trait that helps to create an exception and use its internal data for api problem error response.</p>
+
+<p>Then I created a trait named DomainException.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="code"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="n">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="kn">namespace</span> <span class="nn">MyApplication\Domain\Shared\Exception</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Mezzio\ProblemDetails\Exception\CommonProblemDetailsExceptionTrait</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="k">function</span> <span class="nf">array_merge</span><span class="p">;</span>
+<span class="kn">use</span> <span class="k">function</span> <span class="n">defined</span><span class="p">;</span>
+
+<span class="kd">trait</span> <span class="nc">DomainException</span>
+<span class="p">{</span>
+    <span class="kn">use</span> <span class="nc">CommonProblemDetailsExceptionTrait</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">int</span> <span class="nv">$status</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$detail</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$title</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$type</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$additional</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">status</span>     <span class="o">=</span> <span class="nv">$status</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">detail</span>     <span class="o">=</span> <span class="nv">$detail</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">title</span>      <span class="o">=</span> <span class="nv">$title</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">type</span>       <span class="o">=</span> <span class="nv">$type</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">additional</span> <span class="o">=</span> <span class="nv">$additional</span><span class="p">;</span>
+        <span class="k">parent</span><span class="o">::</span><span class="nf">__construct</span><span class="p">(</span><span class="nv">$detail</span><span class="p">,</span> <span class="nv">$status</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">create</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$details</span><span class="p">,</span> <span class="kt">?array</span> <span class="nv">$additional</span> <span class="o">=</span> <span class="p">[]):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">static</span><span class="p">(</span>
+            <span class="k">self</span><span class="o">::</span><span class="no">STATUS</span><span class="p">,</span>
+            <span class="nv">$details</span><span class="p">,</span>
+            <span class="k">self</span><span class="o">::</span><span class="no">TITLE</span><span class="p">,</span>
+            <span class="nb">defined</span><span class="p">(</span><span class="s1">'static::TYPE'</span><span class="p">)</span> <span class="o">?</span> <span class="k">self</span><span class="o">::</span><span class="no">TYPE</span> <span class="o">:</span> <span class="s1">'https://httpstatus.es/'</span> <span class="mf">.</span> <span class="k">self</span><span class="o">::</span><span class="no">STATUS</span><span class="p">,</span>
+            <span class="nb">array_merge</span><span class="p">(</span><span class="nv">$additional</span><span class="p">,</span> <span class="p">[</span><span class="s1">'code'</span> <span class="o">=&gt;</span> <span class="k">self</span><span class="o">::</span><span class="no">CODE</span><span class="p">])</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Then I am enabled to define my domain exceptions.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="n">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="kn">namespace</span> <span class="nn">MyApplication\Domain\Administrators\Exception</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Mezzio\ProblemDetails\Exception\ProblemDetailsExceptionInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Exception</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">MyApplication\Domain\Shared\Exception\DomainException</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">UserNotFound</span> <span class="kd">extends</span> <span class="nc">Exception</span> <span class="kd">implements</span> <span class="nc">ProblemDetailsExceptionInterface</span>
+<span class="p">{</span>
+    <span class="kn">use</span> <span class="nc">DomainException</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">const</span> <span class="no">STATUS</span> <span class="o">=</span> <span class="mi">404</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="no">CODE</span>   <span class="o">=</span> <span class="s1">'users/user-not-found'</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="no">TYPE</span>   <span class="o">=</span> <span class="s1">'https://my-awesome-api-url.com/docs/errors/users/user-not-found'</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="no">TITLE</span>  <span class="o">=</span> <span class="s1">'User Not Found'</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Using this exception, my hypothetical final code is completed.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="code"><pre><span class="cp">&lt;?php</span>
+
+<span class="mf">...</span>
+
+<span class="kn">use</span> <span class="nc">MyApplication\Domain\Administrators\Exception\UserNotFound</span><span class="p">;</span>
+
+<span class="mf">...</span>
+
+<span class="nv">$message</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AuthenticateUserWithEmail</span><span class="p">(</span><span class="nv">$payload</span><span class="p">[</span><span class="s1">'email'</span><span class="p">],</span> <span class="nv">$payload</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]);</span>
+
+<span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">queryBus</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$message</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span>
+        <span class="s1">'Invalid username and/or password for: %s'</span><span class="p">,</span> 
+        <span class="nv">$payload</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span>
+    <span class="p">);</span>
+    <span class="nv">$additionalData</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">'rateLimit'</span>             <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s1">'totalRequestsLast15Minutes'</span> <span class="o">=&gt;</span> <span class="mi">7</span>
+    <span class="p">];</span>
+    <span class="k">throw</span> <span class="nc">UserNotFound</span><span class="o">::</span><span class="nf">create</span><span class="p">(</span><span class="nv">$message</span><span class="p">,</span> <span class="nv">$additionalData</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="mf">...</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>And the result is:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"rateLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"totalRequestsLast15Minutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"users/user-not-found"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User Not Found"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://my-awesome-api-url.com/docs/errors/users/user-not-found"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">404</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"detail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid username and/or password for mehmet@mkorkmaz.com"</span><span class="w">
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>If you have questions and suggestions, or find bugs in code and logic, please contact me.</p>
+
+<hr />
+
+<h4 id="references">References</h4>
+
+<p><a name="references-1">[1]</a> <a href="https://datatracker.ietf.org/doc/html/rfc7807" target="_blank">RFC7807 Problem Details Specification</a></p>
+
+
+        </div>
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="https://x.com/_mehmet_korkmaz">
+        <img class="avatar" src="/assets/images/avatar.jpg" style="vertical-align: middle;display:inline-block;" alt=""> <span class="dark darker">by Mehmet Korkmaz</span><br/><span class="dark">Practitioner and developer <a href="https://reformo.net" target="_blank">@reformo</a>. <br/>Coding since '97 but I'm neither a ninja nor guru nor junkie.</span>
+
+    </a>
+
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fmkorkmaz.com%2F2021%2F06%2Fapi-problem-specification-compatible-domain-exceptions&amp;text=API-Problem+Specification+Compatible+Domain+Exceptions&amp;via=_mehmet_korkmaz"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script src="/assets/js/jquery.slicknav.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(function(){
+      $('#mobile-menu').slicknav({
+        label: 'Menu',
+        duration: 1000
+      });
+  });
+
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VKK4C4ZH65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "G-VKK4C4ZH65");
+</script>
+
+
+
+</body>
+</html>

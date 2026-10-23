@@ -1,28 +1,106 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>{{ site.name | xml_escape }}</title>
-    <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
-    <link>{{ site.url }}</link>
-    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
-    {% for post in site.posts limit:10 %}
+    <title>Personal Website of Mehmet Korkmaz</title>
+    <description>Practitioner and developer &lt;a href=&quot;https://reformo.net&quot; target=&quot;_blank&quot;&gt;@reformo&lt;/a&gt;. &lt;br/&gt;Coding since &apos;97 but I&apos;m neither a ninja nor guru nor junkie.</description>
+    <link>https://mkorkmaz.com</link>
+    <atom:link href="https://mkorkmaz.com/feed.xml" rel="self" type="application/rss+xml" />
+
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        {% if post.author.name %}
-          <dc:creator>{{ post.author.name | xml_escape }}</dc:creator>
-        {% endif %}
-        {% if post.excerpt %}
-          <description>{{ post.excerpt | xml_escape }}</description>
-        {% else %}
-          <description>{{ post.content | xml_escape }}</description>
-        {% endif %}
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-        <link>{{ site.url }}{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+        <title>API-Problem Specification Compatible Domain Exceptions</title>
+
+
+          <description>&lt;p&gt;RFC7807 Problem Details Specification “defines a ‘problem detail’ as a way to carry machine-readable details of errors in a HTTP response to avoid the need to define new error response formats for HTTP APIs.” &lt;sup&gt;&lt;a href=&quot;#references-1&quot;&gt;[1]&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+</description>
+
+        <pubDate>Sat, 12 Jun 2021 00:00:00 +0000</pubDate>
+        <link>https://mkorkmaz.com/2021/06/api-problem-specification-compatible-domain-exceptions</link>
+        <guid isPermaLink="true">https://mkorkmaz.com/2021/06/api-problem-specification-compatible-domain-exceptions</guid>
       </item>
-    {% endfor %}
+
+      <item>
+        <title>Bedavaya çalışmalı mıyım?</title>
+
+
+          <description>&lt;p&gt;TL; DR&lt;/p&gt;
+
+</description>
+
+        <pubDate>Fri, 29 Mar 2019 00:00:00 +0000</pubDate>
+        <link>https://mkorkmaz.com/2019/03/bedavaya-calismali-miyim</link>
+        <guid isPermaLink="true">https://mkorkmaz.com/2019/03/bedavaya-calismali-miyim</guid>
+      </item>
+
+      <item>
+        <title>Belirsizliği yönetmek kimin görevidir?</title>
+
+
+          <description>&lt;blockquote&gt;
+  &lt;p&gt;“&lt;strong&gt;The point isn’t to make good estimates — the point is to do good work at a consistent pace&lt;/strong&gt;.” &lt;br /&gt;&lt;br /&gt;
+&lt;a href=&quot;https://pragprog.com/book/rjnsd/the-nature-of-software-development&quot; target=&quot;_blank&quot;&gt;Nature of Software Development: Keep It Simple, Make It Valuable, Build It Piece by Piece&lt;/a&gt; by &lt;a href=&quot;https://twitter.com/ronjeffries&quot; target=&quot;_blank&quot;&gt;Ron Jeffries&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+
+        <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
+        <link>https://mkorkmaz.com/2019/03/belirsizligi-yonetmek-kimin-gorevidir</link>
+        <guid isPermaLink="true">https://mkorkmaz.com/2019/03/belirsizligi-yonetmek-kimin-gorevidir</guid>
+      </item>
+
+      <item>
+        <title>Değişime açık olmak</title>
+
+
+          <description>&lt;blockquote&gt;
+  &lt;p&gt;“&lt;strong&gt;Things do change. That’s why we design and build with change in mind.&lt;/strong&gt;” &lt;br /&gt;— Ron Jeffries&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+
+        <pubDate>Sat, 23 Mar 2019 00:00:00 +0000</pubDate>
+        <link>https://mkorkmaz.com/2019/03/degisime-acik-olmak</link>
+        <guid isPermaLink="true">https://mkorkmaz.com/2019/03/degisime-acik-olmak</guid>
+      </item>
+
+      <item>
+        <title>&quot;Remote&quot; Çalışma: Ne kadar mümkün?</title>
+
+
+          <description>&lt;p&gt;Yoğun tempoda çalışan bir insan yaşı biraz ilerleyince şöyle bir durup düşünüyor: Ben ne için, kimin için çalışıyorum?&lt;/p&gt;
+
+</description>
+
+        <pubDate>Mon, 21 Mar 2016 00:00:00 +0000</pubDate>
+        <link>https://mkorkmaz.com/2016/03/remote-calisma-ne-kadar-mumkun</link>
+        <guid isPermaLink="true">https://mkorkmaz.com/2016/03/remote-calisma-ne-kadar-mumkun</guid>
+      </item>
+
+      <item>
+        <title>İlk Bakışta MemSQL</title>
+
+
+          <description>&lt;h4 id=&quot;tldr-english&quot;&gt;TL;DR English&lt;/h4&gt;
+
+</description>
+
+        <pubDate>Mon, 18 Jun 2012 00:00:00 +0000</pubDate>
+        <link>https://mkorkmaz.com/2012/06/memsql-at-first-sight-promising-mysql-replacement</link>
+        <guid isPermaLink="true">https://mkorkmaz.com/2012/06/memsql-at-first-sight-promising-mysql-replacement</guid>
+      </item>
+
+      <item>
+        <title>Bulutta Uygulama Geliştirme</title>
+
+
+          <description>&lt;p&gt;Hepimiz kendi çapında belli birtakım araçlar ile uygulama geliştirmekteyiz. Daha çok web tabanlı uygulama geliştiren bir kişi olarak klasik uygulama geliştirme “soft setup”ım şu şekilde:&lt;/p&gt;
+
+</description>
+
+        <pubDate>Thu, 01 Sep 2011 00:00:00 +0000</pubDate>
+        <link>https://mkorkmaz.com/2011/09/programming-in-the-cloud</link>
+        <guid isPermaLink="true">https://mkorkmaz.com/2011/09/programming-in-the-cloud</guid>
+      </item>
+
   </channel>
 </rss>

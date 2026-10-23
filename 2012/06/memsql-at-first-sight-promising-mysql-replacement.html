@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>İlk Bakışta MemSQL -  Personal Website of Mehmet Korkmaz</title>
+  <link rel="canonical" href="https://mkorkmaz.com/2012/06/memsql-at-first-sight-promising-mysql-replacement">
+  <meta name="description" content="MemSQL at First Sight" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@_mehmet_korkmaz" />
+  <meta name="twitter:creator" content="@_mehmet_korkmaz" />
+  <meta property="twitter:image" content="https://mkorkmaz.com/assets/images/avatar.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image:width" content="600" />
+  <meta property="og:image:height" content="600" />
+
+  <meta property="og:url" content="https://mkorkmaz.com/2012/06/memsql-at-first-sight-promising-mysql-replacement" />
+  <meta property="og:title" content="İlk Bakışta MemSQL -  Personal Website of Mehmet Korkmaz" />
+  <meta property="og:description" content="MemSQL at First Sight" />
+  <meta property="og:image" content="https://mkorkmaz.com/assets/images/avatar.jpg" />
+
+  <link rel="shortcut icon" type="image/png" href="/assets/images/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/slicknav.min.css" />
+  <link rel="stylesheet" href="/assets/css/style.css?v=2020021402">
+  <link rel="stylesheet" href="/assets/css/custom.css">
+  <link rel="alternate" type="application/rss+xml" title="My Blog" href="/feed.xml">
+  <link rel="stylesheet" href="/assets/css/highlight.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+</head>
+<body>
+
+  <nav class="device-lg main-nav">
+
+        <a href="/"> <span class="arrow">←</span> Home </a>
+
+    <a href="/joy-of-coding">Joy of Coding</a>
+        <a href="/agile-johnny">Agile Johnny</a>
+
+    <a href="/about">About </a>
+    <a href="/contact">Contact </a>
+</nav>
+
+    <ul id="mobile-menu" class="device-sm">
+
+
+        <li><a href="/"> <span class="arrow">←</span> Home </a></li>
+
+        <li><a href="/joy-of-coding">Joy of Coding</a></li>
+        <li><a href="/agile-johnny">Agile Johnny</a></li>
+
+        <li><a href="/about">About </a></li>
+        <li><a href="/contact">Contact </a></li>
+    </ul>
+
+
+
+
+  <section id="wrapper" class="">
+    <article class="post">
+    <header>
+        <h1>İlk Bakışta MemSQL</h1>
+        <h3 style="color:#666;">MemSQL at First Sight</h3>
+
+        <h5 style=" color:#666;">
+            Article in Joy Of Coding, Turkish
+        </h5>
+        <h6>
+            June 18, 2012
+        </h6>
+    </header>
+    <section id="post-body">
+        <div style="margin-bottom:10px;color:#666;">[4-5 min.]</div>
+        <div>
+            <h4 id="tldr-english">TL;DR English</h4>
+
+<ul>
+  <li>MemSQL is promising MySQL replacement but there are some issues like this serious one: not joining more than two tables for now.</li>
+  <li>Connection adapters are already there: Use MySQL connection adapters.</li>
+  <li>Same SQL syntax of MySQL except not implemented ones that noted on MemSQL developer site.</li>
+  <li>MemSQL uses memory and is kinda like Memcache+MySQL</li>
+  <li>MemSQL creates shared object libraries for every different type of queries. First execution may be slow (creating shared object library takes times, of course, let’s call it “learning step”) but next ones are blazingly fast.</li>
+</ul>
+
+<hr />
+
+<h4 id="tldr-türkçe">TL;DR Türkçe</h4>
+
+<ul>
+  <li>MemSQL gelecek vaadeden ve MySQL’in yerine kullanılabilecek bir veritabanı fakat an itibariyle ikiden fazla tablodan veri çekme noktasında desteğinin olmaması gibi durumlar mevcut.</li>
+  <li>MemSQL’e bağlanmak için herhangi bir MySQL adaptörünü kullanabilirsiniz.</li>
+  <li>Bazı özellikler henüz uygulanmamış olsa da MySQL ile aynı söz dizilimini kulanılmaktadır.</li>
+  <li>MemSQL RAM’i kullanarak disk üzerindeki I/O tasarrufuyla hız kazanıyor. Benzetme her na kadar doğru olmasa da Memcache+MySQL gibi düşünebiliriz.</li>
+  <li>MemSQL her bir query tipi için shared object kütüphanesi oluşturur. İlk sorgunun cevap döndürmesi biraz zaman alabilir shared object kütüphanesi oluşturulmasından dolayı ama bu “ilk öğrenme” evresinden sonraki sorgulara hızlı cevap verebiliyor.</li>
+</ul>
+
+<hr />
+
+<h1 id="i̇lk-bakışta-memsql"><center>İlk Bakışta MemSQL</center></h1>
+
+<p>Yüksek performans beklenen veritabanı uygulamalarının en büyük maliyeti veritabanına yapılan sorgulardır. Özellikle veri girişinin de yoğun olduğu ve anlık sorgu miktarının çok olduğu durumlarda veritabanının performansı gerçekten kritik bir hal alıyor. Bu durumu bertaraf etmek için kullanılan çeşitli yöntemlerden biri de caching. Daha önce sorgulanmış bir talebi tekrar veritabanına sormadan cevaplayabilmek uygulamanın performansına yönelik yazılımsal anlamda büyük fayda sağlamaktadır.</p>
+
+<p>Çeşitli caching stratejileri var tabi: Talep oldukça ya da önceden kestirelebilecek tüm istekleri daha uygulama içinden talep edilmeden önce cache’lemek gibi. MemSQL de işte bu tip durumdaki uygulamalar göz önünde bulundurularak geliştirilmiş ve MySQL ile aynı söz dizilimini kullanan ve aynı bağlantı adaptörlerini kullanan bir veritabanı. RAM’i kullandığı için diskten okuma maliyetini otomatikmen ortadan kaldırdığından sorguların cevap süreleri inanılmaz azalıyor.</p>
+
+<p>Maalesef MySQL’in tüm özellikleri MemSQL’e aktarılmış değil. Mesela bir çok uygulama için kısıtlayıcı olacak olan ikiden fazla tabloyu birbirine bağlayarak veri çekmek henüz MemSQL’de mümkün değil.</p>
+
+<p>MemSQL’in kurulumu basit. GNU/Linux’ta gerekli geliştirme paketleri yüklü olduğu ve sistem RAM miktarı en az 8GB olduğu sürece bir sıkıntı yaşanmıyor.</p>
+
+<p>Denemelerimi 103 Tablo ve toplamda 771 MB yer kaplayan bir CMS veritabanı ile yaptım. MySQL’den MemSQL’e datayı Navicat ile aktardım. Aktarım sırasında ufak tefek sıkıntılar olduysa da sorun çıkaracak hatalar ile karşılaşmadım. Aktarım sonrasında Navicat tablo isimlerini her ne kadar listeleyemese de komut satırından mysql komutu vasıtasıyla bağlandığımda hiç bir sıkıntı yaşamadım. Uygulamayı MemSQL ile çalışmasını sağlamak için php_mysqli kullanarak çalışan uygulamanın MySQL konfigürasyon kısmındaki bağlantı bilgilerini değiştirerek yapmam yeterli oldu.</p>
+
+<p>Yukarıda da bahsettiğim ikiden fazla tabloyu birbirine bağlayarak veri çekme noktası dışındaki kısımlar gayet düzgün çalıştı. Sunucuyu kontrol ettiğimde gördüğüm kadarıyla MemSQL her bir tabloya herbir ayrı tip query için kendi cache klasöründe tablo ismiyle oluşturduğu başka bir klasör içinde bir shared object kütüphanesi oluşturuyor. Bu kütüphanelerin header ve c kaynak kodlarını da ilgili klasörde bulup incelemek mümkün.</p>
+
+<p>Sonuç olarak MemSQL takip edilmesi gereken bir proje ve bir çok uygulamanın olmazsa olmaz temel ihtiyaçlarını karşıladığı noktadan itibaren de vazgeçilmez olacaktır diye düşünüyorum.</p>
+
+<p>Kaynak ve ilgili siteler:</p>
+<ul>
+  <li><a href="http://memsql.com/">http://memsql.com/</a></li>
+  <li><a href="http://developers.memsql.com/">http://developers.memsql.com/</a></li>
+  <li><a href="https://twitter.com/memsql">https://twitter.com/memsql</a></li>
+</ul>
+
+        </div>
+    </section>
+</article>
+<footer id="post-meta" class="clearfix">
+    <a href="https://x.com/_mehmet_korkmaz">
+        <img class="avatar" src="/assets/images/avatar.jpg" style="vertical-align: middle;display:inline-block;" alt=""> <span class="dark darker">by Mehmet Korkmaz</span><br/><span class="dark">Practitioner and developer <a href="https://reformo.net" target="_blank">@reformo</a>. <br/>Coding since '97 but I'm neither a ninja nor guru nor junkie.</span>
+
+    </a>
+
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fmkorkmaz.com%2F2012%2F06%2Fmemsql-at-first-sight-promising-mysql-replacement&amp;text=%C4%B0lk+Bak%C4%B1%C5%9Fta+MemSQL&amp;via=_mehmet_korkmaz"><span class="icon-twitter"> Tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+<!-- Disqus comments -->
+
+
+<!-- Archive post list -->
+
+
+
+
+
+
+  </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/highlight.js"></script>
+  <script src="/assets/js/jquery.slicknav.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(function(){
+      $('#mobile-menu').slicknav({
+        label: 'Menu',
+        duration: 1000
+      });
+  });
+
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VKK4C4ZH65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', "G-VKK4C4ZH65");
+</script>
+
+
+
+</body>
+</html>
