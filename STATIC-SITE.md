@@ -52,6 +52,6 @@ bağlantılarını güncelleyin. Yazıyı Blog listesine, ilgili kategori sayfas
 RSS'e ve site haritasına ekleyin. Sayfalarda yinelenen menü ve profil alanları
 da artık HTML dosyalarında tutulur.
 
-`drafts/`, `_drafts/` ve `_site/` yerel dosyalar olarak korunur ve Git tarafından
-takip edilmez. Önceki kurulumdan kalan yerel `README.md` ve `test/site_test.rb`
+`drafts/`, `_drafts/` ve `_site/` Git tarafından takip edilmez ve yayına
+dahil edilmez. Önceki kurulumdan kalan yerel `README.md` ve `test/site_test.rb`
 dosyaları da korunur; yeni yapı bu dosyaları kullanmaz.
