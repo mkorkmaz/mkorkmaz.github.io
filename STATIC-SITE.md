@@ -10,7 +10,10 @@ Kökteki `.nojekyll` dosyası Jekyll işlemesini kapatır. `CNAME`, özel alan a
 ## Dosyalar ve adresler
 
 - `index.html`: profil ve biyografi metnini içeren ana sayfa.
-- `blog.html`: tüm yazıların tarih sırasına göre listelendiği Blog sayfası.
+- `journal.html`: genel konulu yazıların yeniden eskiye listelendiği Journal sayfası;
+  ilk yazı eklenene kadar boş durum mesajı gösterir.
+- `blog.html`: mevcut yazıların ve yeni teknik içeriklerin tarih sırasına göre
+  listelendiği Blog sayfası.
 - `contact.html`: iletişim sayfası.
 - `about.html`: eski adresi koruyan biyografi sayfası; canonical adresi ana sayfadır.
 - `joy-of-coding.html`, `agile-johnny.html`: eski kategori adreslerini koruyan arşiv sayfaları.
@@ -21,8 +24,8 @@ Kökteki `.nojekyll` dosyası Jekyll işlemesini kapatır. `CNAME`, özel alan a
 
 Yazıların dosya yapısı, önceki Jekyll çıktısıyla aynıdır. Böylece
 `/2021/06/api-problem-specification-compatible-domain-exceptions` gibi mevcut
-yazı adresleri ve canonical bağlantıları korunur. Menü, ana sayfada Blog ve
-Contact bağlantılarını içerir; diğer sayfalarda Home bağlantısı da bulunur.
+yazı adresleri ve canonical bağlantıları korunur. Menü, ana sayfada Journal,
+Blog ve Contact bağlantılarını içerir; diğer sayfalarda Home bağlantısı da bulunur.
 Yerel önizleme sunucusu da
 uzantısız adresleri ilgili `.html` dosyasına eşler.
 
@@ -48,9 +51,37 @@ python3 -m unittest discover -s tools -p 'test_*.py'
 
 Sayfaları doğrudan HTML dosyalarında düzenleyin. Yeni bir yazı için mevcut
 bir yazının dosyasını kopyalayıp içerik, başlık, tarih, dil, canonical ve paylaşım
-bağlantılarını güncelleyin. Yazıyı Blog listesine, ilgili kategori sayfasına,
+bağlantılarını güncelleyin. Teknik yazıyı Blog listesine, ilgili kategori sayfasına,
 RSS'e ve site haritasına ekleyin. Sayfalarda yinelenen menü ve profil alanları
 da artık HTML dosyalarında tutulur.
+
+### Journal yazısı ekleme
+
+Mevcut yazılar Blog'da kalır. Yeni bir Journal yazısı için mevcut bir yazının HTML
+dosyasını `YYYY/MM/yazi-adi.html` biçiminde kopyalayın. Başlığı, açıklamaları,
+`lang` değerini, yayın tarihini, canonical ve paylaşım adreslerini güncelleyin;
+`#post-body` alanına yazının tamamını yerleştirin. Kategori bilgisini Journal
+olarak değiştirin. Her yazının kendine ait adresi ve detay sayfası olur.
+
+`journal.html` içindeki `#post-list` listesine şu yapıda bir kayıt ekleyin:
+
+```html
+<li>
+    <div>
+        <aside class="dates" style="color:#666;">
+            <time datetime="YYYY-MM-DD">YYYY/MM/DD</time>
+        </aside>
+        <a href="/YYYY/MM/yazi-adi">Yazı başlığı</a>
+    </div>
+    <h2>Yazının kısa açıklaması</h2>
+</li>
+```
+
+`datetime` alanını gerçek yayın tarihiyle ISO `YYYY-MM-DD` biçiminde doldurun.
+Kayıtları HTML'de yeniden eskiye yerleştirin. Sayfa açılırken JavaScript de bu
+tarihlere göre sıralar; ilk kayıt eklendiğinde boş durum mesajını gizler.
+Yazının adresini `sitemap.xml` dosyasına da ekleyin. Journal yazılarını Blog
+listesine veya Blog RSS akışına eklemeyin.
 
 `drafts/`, `_drafts/` ve `_site/` Git tarafından takip edilmez ve yayına
 dahil edilmez.

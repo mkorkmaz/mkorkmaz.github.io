@@ -23,7 +23,7 @@ ARTICLE_ROUTES = [
     "/2012/06/memsql-at-first-sight-promising-mysql-replacement",
     "/2011/09/programming-in-the-cloud",
 ]
-PAGE_ROUTES = ["/", "/about", "/blog", "/contact", "/joy-of-coding", "/agile-johnny", "/404"]
+PAGE_ROUTES = ["/", "/about", "/journal", "/blog", "/contact", "/joy-of-coding", "/agile-johnny", "/404"]
 
 
 class PageDocument(HTMLParser):
@@ -74,7 +74,7 @@ class StaticSiteTest(unittest.TestCase):
                     self.assertEqual(path.read_bytes(), response.read())
 
     def test_all_pages_are_complete_html_without_template_processing(self):
-        self.assertEqual(14, len(list(ROOT.glob("*.html"))) + len(list(ROOT.glob("20*/*/*.html"))))
+        self.assertEqual(15, len(list(ROOT.glob("*.html"))) + len(list(ROOT.glob("20*/*/*.html"))))
         for route in PAGE_ROUTES + ARTICLE_ROUTES:
             path = resolvePublishedFile(ROOT, route)
             source = path.read_text()
@@ -111,10 +111,21 @@ class StaticSiteTest(unittest.TestCase):
         self.assertEqual(ARTICLE_ROUTES, [link["href"] for link in blog.select("a") if link.get("href") in ARTICLE_ROUTES])
         for route in PAGE_ROUTES + ARTICLE_ROUTES:
             source = resolvePublishedFile(ROOT, route).read_text()
-            expected = (["/"] if route != "/" else []) + ["/blog", "/contact"]
+            expected = (["/"] if route != "/" else []) + ["/journal", "/blog", "/contact"]
             for pattern in (r'<nav class="device-lg main-nav">(.*?)</nav>', r'<ul id="mobile-menu" class="device-sm">(.*?)</ul>'):
                 navigation = re.search(pattern, source, re.DOTALL).group(1)
                 self.assertEqual(expected, re.findall(r'href="([^"]+)"', navigation), route)
+
+    def test_journal_starts_empty_and_keeps_existing_articles_in_blog(self):
+        source = (ROOT / "journal.html").read_text()
+        document = PageDocument(ROOT / "journal.html")
+        self.assertEqual(1, len(document.select("ul", id="post-list")))
+        entries = re.search(r'<ul id="post-list"[^>]*>(.*?)</ul>', source, re.DOTALL).group(1)
+        self.assertNotIn("<li", entries)
+        self.assertIn('<p id="journal-empty">No entries yet.</p>', source)
+        self.assertEqual([], [link for link in document.select("a") if link.get("href") in ARTICLE_ROUTES])
+        blog = PageDocument(ROOT / "blog.html")
+        self.assertEqual(ARTICLE_ROUTES, [link["href"] for link in blog.select("a") if link.get("href") in ARTICLE_ROUTES])
 
     def test_article_sharing_keeps_absolute_urls_and_complete_titles(self):
         for route in ARTICLE_ROUTES:
