@@ -14,7 +14,7 @@ import xml.etree.ElementTree as ElementTree
 from serve import ROOT, StaticSiteHandler, resolvePublishedFile
 
 
-ARTICLE_ROUTES = [
+BLOG_ROUTES = [
     "/2021/06/api-problem-specification-compatible-domain-exceptions",
     "/2019/03/bedavaya-calismali-miyim",
     "/2019/03/belirsizligi-yonetmek-kimin-gorevidir",
@@ -23,6 +23,10 @@ ARTICLE_ROUTES = [
     "/2012/06/memsql-at-first-sight-promising-mysql-replacement",
     "/2011/09/programming-in-the-cloud",
 ]
+JOURNAL_ROUTES = [
+    "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insan-yonu",
+]
+ARTICLE_ROUTES = JOURNAL_ROUTES + BLOG_ROUTES
 PAGE_ROUTES = ["/", "/about", "/journal", "/blog", "/contact", "/joy-of-coding", "/agile-johnny", "/404"]
 
 
@@ -65,7 +69,7 @@ class StaticSiteTest(unittest.TestCase):
                 document = PageDocument(path)
                 canonicalRoute = "/" if route == "/about" else route
                 self.assertEqual([{"rel": "canonical", "href": "https://mkorkmaz.com" + canonicalRoute}], document.select("link", rel="canonical"))
-                language = "tr" if route in ARTICLE_ROUTES[1:] else "en"
+                language = "tr" if route in JOURNAL_ROUTES + BLOG_ROUTES[1:] else "en"
                 self.assertEqual(language, document.select("html")[0]["lang"])
                 address = f"http://127.0.0.1:{self.server.server_port}{route}"
                 with urlopen(address, timeout=5) as response:
@@ -74,7 +78,7 @@ class StaticSiteTest(unittest.TestCase):
                     self.assertEqual(path.read_bytes(), response.read())
 
     def test_all_pages_are_complete_html_without_template_processing(self):
-        self.assertEqual(15, len(list(ROOT.glob("*.html"))) + len(list(ROOT.glob("20*/*/*.html"))))
+        self.assertEqual(len(PAGE_ROUTES + ARTICLE_ROUTES), len(list(ROOT.glob("*.html"))) + len(list(ROOT.glob("20*/*/*.html"))))
         for route in PAGE_ROUTES + ARTICLE_ROUTES:
             path = resolvePublishedFile(ROOT, route)
             source = path.read_text()
@@ -95,7 +99,7 @@ class StaticSiteTest(unittest.TestCase):
                     if target.startswith("/") and not target.startswith("//"):
                         self.assertIsNotNone(resolvePublishedFile(ROOT, target), f"{route}: {target}")
         source = (ROOT / "blog.html").read_text()
-        positions = [source.index(f'href="{route}"') for route in ARTICLE_ROUTES]
+        positions = [source.index(f'href="{route}"') for route in BLOG_ROUTES]
         self.assertEqual(sorted(positions), positions)
 
     def test_homepage_biography_and_blog_navigation(self):
@@ -108,7 +112,7 @@ class StaticSiteTest(unittest.TestCase):
         self.assertEqual([], PageDocument(ROOT / "index.html").select("ul", id="post-list"))
         blog = PageDocument(ROOT / "blog.html")
         self.assertEqual(1, len(blog.select("ul", id="post-list")))
-        self.assertEqual(ARTICLE_ROUTES, [link["href"] for link in blog.select("a") if link.get("href") in ARTICLE_ROUTES])
+        self.assertEqual(BLOG_ROUTES, [link["href"] for link in blog.select("a") if link.get("href") in ARTICLE_ROUTES])
         for route in PAGE_ROUTES + ARTICLE_ROUTES:
             source = resolvePublishedFile(ROOT, route).read_text()
             expected = (["/"] if route != "/" else []) + ["/journal", "/blog", "/contact"]
@@ -116,16 +120,19 @@ class StaticSiteTest(unittest.TestCase):
                 navigation = re.search(pattern, source, re.DOTALL).group(1)
                 self.assertEqual(expected, re.findall(r'href="([^"]+)"', navigation), route)
 
-    def test_journal_starts_empty_and_keeps_existing_articles_in_blog(self):
-        source = (ROOT / "journal.html").read_text()
+    def test_journal_lists_its_articles_separately_from_blog(self):
         document = PageDocument(ROOT / "journal.html")
         self.assertEqual(1, len(document.select("ul", id="post-list")))
-        entries = re.search(r'<ul id="post-list"[^>]*>(.*?)</ul>', source, re.DOTALL).group(1)
-        self.assertNotIn("<li", entries)
-        self.assertIn('<p id="journal-empty">No entries yet.</p>', source)
-        self.assertEqual([], [link for link in document.select("a") if link.get("href") in ARTICLE_ROUTES])
+        self.assertEqual(JOURNAL_ROUTES, [link["href"] for link in document.select("a") if link.get("href") in ARTICLE_ROUTES])
+        dates = [element["datetime"] for element in document.select("time")]
+        self.assertEqual(len(JOURNAL_ROUTES), len(dates))
+        self.assertEqual(sorted(dates, reverse=True), dates)
+        self.assertIn("hidden", document.select("p", id="journal-empty")[0])
+        for route in JOURNAL_ROUTES:
+            article = PageDocument(resolvePublishedFile(ROOT, route))
+            self.assertEqual(1, len(article.select("section", id="post-body")))
         blog = PageDocument(ROOT / "blog.html")
-        self.assertEqual(ARTICLE_ROUTES, [link["href"] for link in blog.select("a") if link.get("href") in ARTICLE_ROUTES])
+        self.assertEqual(BLOG_ROUTES, [link["href"] for link in blog.select("a") if link.get("href") in ARTICLE_ROUTES])
 
     def test_article_sharing_keeps_absolute_urls_and_complete_titles(self):
         for route in ARTICLE_ROUTES:
@@ -136,13 +143,13 @@ class StaticSiteTest(unittest.TestCase):
             self.assertEqual(["_mehmet_korkmaz"], parameters["via"])
             self.assertTrue(parameters["text"][0])
             self.assertEqual({"class", "href"}, set(share))
-        remote = PageDocument(resolvePublishedFile(ROOT, ARTICLE_ROUTES[4]))
+        remote = PageDocument(resolvePublishedFile(ROOT, BLOG_ROUTES[4]))
         self.assertIn('"Remote"', parse_qs(urlsplit(remote.select("a", **{"class": "twitter"})[0]["href"]).query)["text"][0])
 
     def test_feed_sitemap_and_contact_are_static(self):
         feed = ElementTree.parse(ROOT / "feed.xml")
         self.assertEqual("https://mkorkmaz.com/blog", feed.findtext("./channel/link"))
-        self.assertEqual(ARTICLE_ROUTES, [urlsplit(item.text).path for item in feed.findall("./channel/item/link")])
+        self.assertEqual(BLOG_ROUTES, [urlsplit(item.text).path for item in feed.findall("./channel/item/link")])
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")
         locations = sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
         self.assertEqual(set(PAGE_ROUTES + ARTICLE_ROUTES) - {"/about"}, {urlsplit(item.text).path for item in locations})
