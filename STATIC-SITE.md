@@ -53,5 +53,4 @@ RSS'e ve site haritasına ekleyin. Sayfalarda yinelenen menü ve profil alanlar�
 da artık HTML dosyalarında tutulur.
 
 `drafts/`, `_drafts/` ve `_site/` Git tarafından takip edilmez ve yayına
-dahil edilmez. Önceki kurulumdan kalan yerel `README.md` ve `test/site_test.rb`
-dosyaları da korunur; yeni yapı bu dosyaları kullanmaz.
+dahil edilmez.

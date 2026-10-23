@@ -4,7 +4,4 @@ _site
 drafts/
 _drafts/
 
-# Keep the existing local Jekyll notes and tests without publishing them.
-/README.md
-/test/site_test.rb
 __pycache__/
