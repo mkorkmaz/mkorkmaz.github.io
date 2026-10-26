@@ -15,7 +15,8 @@ Kökteki `.nojekyll` dosyası Jekyll işlemesini kapatır. `CNAME`, özel alan a
 - `blog.html`: mevcut yazıların ve yeni teknik içeriklerin tarih sırasına göre
   listelendiği Blog sayfası.
 - `contact.html`: iletişim sayfası.
-- `about.html`: eski adresi koruyan biyografi sayfası; canonical adresi ana sayfadır.
+- `about.html`: `/about` ve `/about.html` adreslerinden ana sayfaya anında
+  yönlendiren dosya; biyografi yalnızca ana sayfada bulunur.
 - `joy-of-coding.html`, `agile-johnny.html`: eski kategori adreslerini koruyan arşiv sayfaları.
 - `YYYY/MM/yazi-adi.html`: yazılar.
 - `assets/`: mevcut stil, JavaScript, görsel ve yazı tipi dosyaları.
@@ -28,6 +29,12 @@ yazı adresleri ve canonical bağlantıları korunur. Menü, ana sayfada Journal
 Blog ve Contact bağlantılarını içerir; diğer sayfalarda Home bağlantısı da bulunur.
 Yerel önizleme sunucusu da
 uzantısız adresleri ilgili `.html` dosyasına eşler.
+
+`about.html`, sıfır saniyelik `meta refresh` ve ana sayfayı gösteren canonical
+bağlantısı içerir. GitHub Pages üzerinde dosya tabanlı özel HTTP 301 kuralları
+tanımlanamadığı için bu yönlendirme HTML üzerinden yapılır; HTTP yanıtı 200'dür.
+Gerçek HTTP 301 için sunucu veya CDN katmanında `/about` ve `/about.html`
+adreslerini `https://mkorkmaz.com/` adresine yönlendiren bir kural gerekir.
 
 ## Yerel önizleme ve kontroller
 

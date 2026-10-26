@@ -27,8 +27,9 @@ JOURNAL_ROUTES = [
     "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insani-yonu",
 ]
 ARTICLE_ROUTES = JOURNAL_ROUTES + BLOG_ROUTES
-PAGE_ROUTES = ["/", "/about", "/journal", "/blog", "/contact", "/joy-of-coding", "/agile-johnny", "/404"]
+PAGE_ROUTES = ["/", "/journal", "/blog", "/contact", "/joy-of-coding", "/agile-johnny", "/404"]
 REDIRECT_ROUTES = {
+    "/about": "/",
     "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insan-yonu": JOURNAL_ROUTES[0],
 }
 
@@ -70,9 +71,9 @@ class StaticSiteTest(unittest.TestCase):
                 path = resolvePublishedFile(ROOT, route)
                 self.assertIsNotNone(path)
                 document = PageDocument(path)
-                canonicalRoute = REDIRECT_ROUTES.get(route, "/" if route == "/about" else route)
+                canonicalRoute = REDIRECT_ROUTES.get(route, route)
                 self.assertEqual([{"rel": "canonical", "href": "https://mkorkmaz.com" + canonicalRoute}], document.select("link", rel="canonical"))
-                language = "tr" if route in JOURNAL_ROUTES + BLOG_ROUTES[1:] + list(REDIRECT_ROUTES) else "en"
+                language = "tr" if route.startswith("/20") and route != BLOG_ROUTES[0] else "en"
                 self.assertEqual(language, document.select("html")[0]["lang"])
                 if route in REDIRECT_ROUTES:
                     self.assertEqual([{"http-equiv": "refresh", "content": "0; url=" + canonicalRoute}], document.select("meta", **{"http-equiv": "refresh"}))
@@ -110,11 +111,10 @@ class StaticSiteTest(unittest.TestCase):
 
     def test_homepage_biography_and_blog_navigation(self):
         home = (ROOT / "index.html").read_text()
-        about = (ROOT / "about.html").read_text()
-        paragraphs = re.findall(r"<p>(.*?)</p>", about, re.DOTALL)
+        paragraphs = re.findall(r"<p>(.*?)</p>", home, re.DOTALL)
         self.assertEqual(5, len(paragraphs))
-        for paragraph in paragraphs:
-            self.assertIn(f"<p>{paragraph}</p>", home)
+        self.assertIn("I am a product engineer", paragraphs[0])
+        self.assertIn("My architectural approach", paragraphs[-1])
         self.assertEqual([], PageDocument(ROOT / "index.html").select("ul", id="post-list"))
         blog = PageDocument(ROOT / "blog.html")
         self.assertEqual(1, len(blog.select("ul", id="post-list")))
@@ -158,7 +158,7 @@ class StaticSiteTest(unittest.TestCase):
         self.assertEqual(BLOG_ROUTES, [urlsplit(item.text).path for item in feed.findall("./channel/item/link")])
         sitemap = ElementTree.parse(ROOT / "sitemap.xml")
         locations = sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
-        self.assertEqual(set(PAGE_ROUTES + ARTICLE_ROUTES) - {"/about"}, {urlsplit(item.text).path for item in locations})
+        self.assertEqual(set(PAGE_ROUTES + ARTICLE_ROUTES), {urlsplit(item.text).path for item in locations})
         contact = PageDocument(ROOT / "contact.html")
         self.assertEqual([], contact.select("form"))
         self.assertEqual(1, len(contact.select("a", href="mailto:mehmet@mkorkmaz.com")))
