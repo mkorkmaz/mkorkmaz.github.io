@@ -24,13 +24,14 @@ BLOG_ROUTES = [
     "/2011/09/programming-in-the-cloud",
 ]
 JOURNAL_ROUTES = [
+    "/2026/11/ai-lay-off",
     "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insani-yonu",
 ]
 ARTICLE_ROUTES = JOURNAL_ROUTES + BLOG_ROUTES
 PAGE_ROUTES = ["/", "/journal", "/blog", "/contact", "/joy-of-coding", "/agile-johnny", "/404"]
 REDIRECT_ROUTES = {
     "/about": "/",
-    "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insan-yonu": JOURNAL_ROUTES[0],
+    "/2026/10/mcgregordan-gunumuze-yapay-zeka-caginda-hayatin-insan-yonu": JOURNAL_ROUTES[1],
 }
 
 
