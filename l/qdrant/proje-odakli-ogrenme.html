@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Üç proje ile Qdrant öğrenin: ilk sorgu, Türkçe destek belgelerinde arama ve yetki kontrollü hibrit arama. Kod örnekleri ve yedi haftalık uygulama planı.">
+<title>Qdrant · Proje Odaklı Öğrenme</title>
+<style>
+:root{color-scheme:light;--bg:#fff;--soft:#f7f8fa;--ink:#202c36;--muted:#5d6974;--line:#e2e6ea;--accent:#25639a;--tint:#eef5fb;--max:1000px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}a{color:var(--accent);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}button,input{font:inherit}button{cursor:pointer}p{margin:0 0 1.1em}h1,h2,h3,h4{line-height:1.25;font-weight:650;letter-spacing:-.025em;margin:0 0 .7em}h1{font-size:clamp(2.35rem,5.1vw,3.5rem);letter-spacing:-.045em}h1 span{display:block;color:var(--accent);font-weight:600}h2{font-size:clamp(1.6rem,3vw,2rem)}h3{font-size:1.16rem;margin-top:1.8rem}h4{font-size:1rem;margin-top:1.2rem}ul,ol{padding-left:1.3em;margin:.6em 0 1.3em}li{margin:.4em 0}strong{font-weight:650}:focus-visible{outline:3px solid #8ab9e0;outline-offset:4px}::selection{background:#dcecf9}.skip{position:fixed;top:-80px;left:16px;background:var(--ink);color:#fff;padding:10px 15px;z-index:30}.skip:focus{top:12px}.wrap{width:min(var(--max),100%);margin:auto;padding:0 36px}.topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:64px}.brand{font-size:.9rem;font-weight:700;text-decoration:none;color:var(--ink);white-space:nowrap}.nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.nav a{font-size:.77rem;text-decoration:none;color:var(--muted)}.nav a:hover{color:var(--accent)}.hero{padding:56px 0 36px}.eyebrow{color:var(--muted);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}.lead{max-width:710px;font-size:1.05rem;color:var(--muted);line-height:1.8;margin:20px 0}.meta{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);margin-top:22px}.meta strong{color:var(--ink)}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.button{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-size:.78rem;line-height:1.5;color:var(--ink)}.button:hover{background:var(--soft)}.button.primary{border-color:var(--accent);color:var(--accent)}.js-only{display:none}.has-js .js-only{display:inline-flex}.project-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:32px 0 0}.overview-card{display:block;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:20px;background:#fff;color:var(--ink)}.overview-card:hover{border-color:#9ebfdc}.overview-card .top{display:flex;justify-content:space-between;font-size:.69rem;color:var(--muted);gap:12px;margin-bottom:15px}.overview-card .n{color:var(--accent);font-weight:700}.overview-card h2{font-size:1.08rem;line-height:1.4;margin:0 0 7px;letter-spacing:-.02em}.overview-card p{font-size:.8rem;color:var(--muted);line-height:1.65;margin:0}.section{padding:36px 0 28px;border-top:1px solid var(--line);margin-top:24px;scroll-margin-top:88px}.section-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:23px}.section-n{flex:0 0 38px;height:38px;border:1px solid #c8dbea;border-radius:7px;display:grid;place-items:center;color:var(--accent);font-size:.85rem;font-weight:700;margin-top:2px}.section-head>div:last-child{min-width:0}.section-head .eyebrow{font-size:.67rem;margin-bottom:8px}.section-head h2{margin-bottom:10px;overflow-wrap:anywhere}.section-head p{font-size:.91rem;color:var(--muted);max-width:780px;margin:0}.section p,.section li{overflow-wrap:anywhere}.muted{color:var(--muted)}.small{font-size:.79rem;line-height:1.65}.note{border:1px solid var(--line);border-left:3px solid #a8c3da;padding:16px 19px;border-radius:5px;background:#fbfcfd;margin:23px 0;font-size:.86rem}.note p:last-child{margin:0}.note strong{color:var(--ink)}.split{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin:24px 0}.split>div{min-width:0}.split h3{margin-top:0}.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:7px;margin:20px 0 26px}table{width:100%;border-collapse:collapse;text-align:left;font-size:.82rem;line-height:1.6}th{padding:12px 14px;background:var(--soft);font-weight:650;font-size:.75rem;vertical-align:top}td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top}td:first-child{font-weight:600}tr:nth-child(even) td{background:#fdfdfe}code{font: .86em/1.5 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;background:#f0f3f5;color:#2d465d;padding:2px 4px;border-radius:3px;overflow-wrap:anywhere}pre{font: .78rem/1.75 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace;overflow:auto;padding:20px;margin:0;color:#2c3a47;background:#f7f9fb;tab-size:4}pre code{font:inherit;background:none;padding:0;color:inherit;border-radius:0;overflow-wrap:normal}.code-box{border:1px solid var(--line);border-radius:7px;overflow:hidden;margin:20px 0}.code-tools{padding:9px 13px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);background:#f1f4f7;color:var(--muted);font-size:.7rem}.code-tools>span{min-width:0;overflow-wrap:anywhere}.copy{align-items:center;justify-content:center;background:#fff;border:1px solid #d3dae0;border-radius:4px;color:var(--ink);font-size:.67rem;min-width:73px;padding:5px 9px;flex-shrink:0}.copy:hover{background:#eaf2f8}.code-details{border:1px solid var(--line);border-radius:7px;margin:23px 0;background:#fff}.code-details summary{padding:14px 17px;cursor:pointer;font-size:.82rem;overflow-wrap:anywhere}.code-details summary>span:first-child{font-weight:600}.code-details summary::marker{color:var(--accent)}.summary-hint{margin-left:12px;color:var(--muted);font-size:.72rem}.code-details[open] .summary-hint{display:none}.code-details .code-box{margin:0;border:0;border-top:1px solid var(--line);border-radius:0 0 6px 6px}.expected{border:1px solid var(--line);border-radius:7px;margin:15px 0;overflow:hidden}.expected pre{font-size:.78rem;padding:14px 18px}.task-list{counter-reset:task;list-style:none;padding:0;margin:17px 0 25px}.task-list>li{counter-increment:task;position:relative;padding:2px 0 15px 33px;margin:0;border-left:1px solid var(--line);margin-left:10px}.task-list>li:last-child{border-left-color:transparent;padding-bottom:0}.task-list>li:before{content:counter(task);position:absolute;top:2px;left:-11px;width:21px;height:21px;background:#fff;border:1px solid #cbd6e0;border-radius:100%;font-size:.66rem;line-height:20px;text-align:center;color:var(--accent)}.task-list strong{display:block;margin-bottom:3px}.task-list p{font-size:.9rem;margin-bottom:0}.checklist{border-top:1px solid var(--line);padding-top:18px;margin-top:27px}.checklist h3{margin-top:0;font-size:1rem}.checklist label{display:flex;align-items:flex-start;gap:10px;font-size:.86rem;line-height:1.65;margin:10px 0;cursor:pointer}.checklist input{margin:5px 0 0;width:16px;height:16px;flex-shrink:0;accent-color:var(--accent)}.checklist input:checked+span{color:#486b5e}.cite{font-size:.65em;line-height:0;white-space:nowrap;vertical-align:super;margin-left:2px}.cite a{text-decoration:none;color:var(--accent);font-weight:650}.deliverable{display:flex;align-items:flex-start;gap:12px;background:var(--tint);border-radius:6px;padding:15px 18px;margin:22px 0;font-size:.86rem}.deliverable strong{color:#23577e;white-space:nowrap}.sources{list-style:none;padding:0;margin:22px 0}.sources li{display:flex;gap:15px;border-top:1px solid var(--line);padding:12px 0;margin:0;font-size:.82rem;break-inside:avoid;scroll-margin-top:90px}.sources .source-n{font-size:.72rem;min-width:20px;color:var(--muted);padding-top:2px}.sources a{text-decoration:none;font-weight:600}.sources p{font-size:.76rem;color:var(--muted);margin:3px 0 0}.footer{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;border-top:1px solid var(--line);padding:24px 0 42px;margin-top:20px;font-size:.73rem;color:var(--muted)}.footer p{margin:0}.footer a{color:var(--muted)}.run-note{font-size:.77rem;color:var(--muted);margin:11px 0 21px}.progress-note{font-size:.75rem;color:var(--muted);margin-top:20px}.no-js-note{font-size:.8rem;background:var(--soft);padding:15px;border-radius:6px;margin-top:20px}
+@media(max-width:780px){.wrap{padding:0 23px}.topbar .wrap{min-height:62px;gap:14px}.brand{font-size:.82rem}.nav{gap:13px}.nav a{font-size:.72rem}.nav a.optional{display:none}.hero{padding-top:37px}.project-overview{gap:10px}.overview-card{padding:15px}.overview-card h2{font-size:.96rem}.overview-card .top{margin-bottom:12px}.overview-card p{font-size:.76rem}.lead{font-size:1rem}.section{padding-top:31px}.split{gap:20px}.section-head h2{font-size:1.7rem}}
+@media(max-width:560px){body{font-size:15px}.wrap{padding:0 19px}.topbar .wrap{display:block;padding-top:11px;padding-bottom:11px}.brand{display:block;margin-bottom:7px}.nav{gap:17px;flex-wrap:nowrap}.nav a{font-size:.72rem}.hero{padding:31px 0 25px}h1{font-size:2.4rem;line-height:1.15}.eyebrow{font-size:.65rem;letter-spacing:.09em}.lead{font-size:.94rem}.meta{font-size:.74rem;gap:7px 15px;margin-top:20px}.hero-actions{margin-top:21px}.project-overview{grid-template-columns:1fr;margin-top:25px;gap:10px}.overview-card{padding:17px}.overview-card .top{margin-bottom:9px}.overview-card h2{font-size:1.08rem}.overview-card p{font-size:.8rem}.section{margin-top:16px;padding-top:29px}.section-head{gap:12px;margin-bottom:19px}.section-n{flex-basis:31px;height:31px;font-size:.74rem}.section-head h2{font-size:1.55rem;line-height:1.3}.section-head p{font-size:.86rem}.section-head .eyebrow{font-size:.62rem}.split{grid-template-columns:1fr;gap:9px;margin:20px 0}.split h3{margin-top:10px}h3{font-size:1.08rem;margin-top:1.6rem}.note{padding:14px 15px;font-size:.83rem}.table-wrap{margin:17px 0 22px}table{font-size:.77rem;min-width:550px}th,td{padding:11px 12px}.small-table{min-width:0}.small-table th,.small-table td{padding:10px}.small-table td:first-child{width:31%}pre{font-size:.7rem;padding:16px}.code-tools{font-size:.64rem;padding:9px 10px}.copy{font-size:.64rem;min-width:67px}.code-details summary{font-size:.78rem;padding:13px 14px}.summary-hint{display:block;font-size:.69rem;margin:4px 0 0 16px}.task-list>li{padding-left:26px}.task-list p{font-size:.86rem}.checklist label{font-size:.83rem}.deliverable{display:block;font-size:.82rem;padding:14px 16px}.deliverable strong{display:block;margin-bottom:4px}.footer{display:block;font-size:.7rem;padding-bottom:28px}.footer p+p{margin-top:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@page{size:A4;margin:17mm 16mm}
+@media print{html{scroll-behavior:auto}body{font-size:10pt;line-height:1.55;color:#202c36;background:#fff}.wrap{width:100%;padding:0}.topbar,.hero-actions,.js-only,.copy,.summary-hint,.no-print,.no-js-note{display:none!important}.hero{padding:0 0 18px}h1{font-size:30pt;line-height:1.15}.lead{font-size:11pt;max-width:none}.eyebrow{font-size:7pt}.meta{font-size:8pt}.project-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;break-inside:avoid}.overview-card{padding:12px}.overview-card h2{font-size:10pt}.overview-card p{font-size:8pt}.overview-card .top{font-size:7pt;margin-bottom:10px}.section{padding:24px 0 10px;margin:0}.project{break-before:page;border-top:0;padding-top:0}.section-head{margin-bottom:15px;gap:12px}.section-n{width:31px;height:31px;flex-basis:31px;font-size:10pt}.section-head h2{font-size:20pt}.section-head p{font-size:10pt}.section-head .eyebrow{font-size:7pt}h2,h3,h4{break-after:avoid}h3{font-size:12pt;margin-top:20px}p,li{orphans:3;widows:3}.note,.deliverable,.checklist{break-inside:avoid;font-size:9pt;padding:13px}.split{display:block}.split>div{margin-bottom:15px}.task-list p{font-size:10pt}.table-wrap{overflow:visible;border:0;border-radius:0;margin:15px 0}table,.small-table{min-width:0;font-size:8pt;line-height:1.4}th{font-size:7pt}th,td{padding:7px 9px;border:1px solid var(--line)}thead{display:table-header-group}tr{break-inside:avoid}code{font-size:8pt}pre{font-size:7.5pt;line-height:1.55;white-space:pre-wrap;overflow:visible;overflow-wrap:anywhere;padding:12px}pre code{font:inherit;overflow-wrap:anywhere}.code-tools{font-size:7pt;padding:8px 12px}.code-box{margin:13px 0;break-inside:auto}.code-details{margin:16px 0;break-inside:auto}.code-details summary{font-size:9pt;list-style:none;padding:10px 12px}.code-details summary::-webkit-details-marker{display:none}.code-details::details-content{content-visibility:visible}.code-details>.code-box{display:block!important}.checklist label{font-size:9pt;margin:7px 0}.checklist input{width:12px;height:12px;margin-top:3px}.sources li{font-size:9pt;padding:8px 0}.sources p{font-size:8pt}.run-note,.progress-note{font-size:8pt}.footer{font-size:8pt;padding-bottom:0;margin-top:20px}.footer a{display:none}a{color:#255c87;text-decoration:none}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+<header class="topbar"><div class="wrap"><a class="brand" href="#baslangic">Qdrant / Proje rehberi</a><nav class="nav" aria-label="Bölümler"><a href="#proje-1">Proje 1</a><a href="#proje-2">Proje 2</a><a href="#proje-3">Proje 3</a><a href="#plan">Plan</a><a class="optional" href="#kaynaklar">Kaynaklar</a></nav></div></header>
+<main class="wrap" id="icerik">
+<section class="hero" id="baslangic">
+<div class="eyebrow">Uygulamalı rehber · 9 Kasım 2026</div>
+<h1>Qdrant<span>Proje odaklı öğrenme</span></h1>
+<p class="lead">İlk vektör sorgusundan Türkçe belgelerde arama yapan bir ürüne ilerleyin. Üç projede veriyi hazırlayın, aramayı kurun ve sonuçları ölçün.</p>
+<div class="meta"><span><strong>3 proje</strong></span><span>Önerilen süre: <strong>56 saat</strong></span><span><strong>7 hafta</strong> · haftada 8 saat</span></div>
+<div class="hero-actions"><a class="button primary" href="#hazirlik">Başlamadan önce</a><button type="button" class="button js-only" id="print-report">Yazdır / PDF</button></div>
+<div class="project-overview">
+<a class="overview-card" href="#proje-1"><div class="top"><span class="n">PROJE 01</span><span>6 saat</span></div><h2>İlk Qdrant sorgusu</h2><p>Kayıt ekleyin, benzerlik sorgusu çalıştırın ve sonuçları filtreleyin.</p></a>
+<a class="overview-card" href="#proje-2"><div class="top"><span class="n">PROJE 02</span><span>18 saat</span></div><h2>Türkçe destek araması</h2><p>Gerçek metinleri vektörleştirin; sonuçları kaynaklarıyla gösterin.</p></a>
+<a class="overview-card" href="#proje-3"><div class="top"><span class="n">PROJE 03</span><span>32 saat</span></div><h2>Hibrit arama ürünü</h2><p>Erişim kuralları, veri güncellemeleri ve kalite ölçümü ekleyin.</p></a>
+</div>
+<noscript><p class="no-js-note">Raporun bütün içeriği okunabilir; kodları başlıklarına tıklayarak açabilirsiniz. Yazdırmak için tarayıcınızın yazdır komutunu kullanın.</p></noscript>
+</section>
+
+<section class="section" id="hazirlik">
+<h2>Başlamadan önce</h2>
+<p>Temel Python bilgisiyle başlayabilirsiniz: fonksiyon, liste ve sözlük kullanabilmek; JSON okuyabilmek ve terminalden paket kurabilmek yeterli. HTTP ve Docker bilgisi üçüncü projede işinizi kolaylaştırır.</p>
+<div class="split"><div><h3>Üç projenin ortak konusu</h3><p>Türkçe destek belgelerinde arama. Küçük bir Python dosyasıyla başlayıp iki örnek kurumun ve farklı erişim gruplarının kullanabildiği bir arama uygulamasına ilerleyeceksiniz.</p></div><div><h3>Her projede biriktirin</h3><p>Çalıştırma yönergesi, kod, örnek veri, sorgular ve beklenen sonuçlar. Projeyi bitirirken neyin çalıştığını, hangi sorularda hata gördüğünüzü ve sonraki deneyi kısa bir notta açıklayın.</p></div></div>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Uygulamadaki bileşenler"><table class="small-table"><thead><tr><th>Bileşen</th><th>Bu projelerdeki görevi</th></tr></thead><tbody><tr><td>Embedding modeli</td><td>Belgeyi ve soruyu karşılaştırılabilir sayısal temsillere dönüştürür.</td></tr><tr><td>Qdrant</td><td>Vektörleri ve metaveriyi saklar; benzer kayıtları belirtilen filtrelerle getirir.</td></tr><tr><td>Uygulama</td><td>Kullanıcı kapsamını belirler, sorguyu hazırlar ve sonuçları kaynaklarıyla gösterir.</td></tr></tbody></table></div>
+<p>İkinci projede embedding üretimini Sentence Transformers ile yapacağız. Python istemcisinin <code>:memory:</code> modu, ayrı bir sunucu kurmadan küçük deneyler yapmanızı sağlar. Bu projelerde LLM kullanmak zorunlu değildir. <sup class="cite"><a href="#kaynak-1" aria-label="Kaynak 1">[1]</a></sup> <sup class="cite"><a href="#kaynak-8" aria-label="Kaynak 8">[8]</a></sup></p>
+<h3>Ortak çalışma ortamı</h3>
+<p>Python 3.12 ve <code>qdrant-client==1.19.1</code> ile bir proje klasörü oluşturun. Aşağıdaki sürüm, önceki raporun laboratuvarlarıyla aynı örnek ortamını korur; en yeni sürüm olduğu iddia edilmez.</p>
+<div class="code-box"><div class="code-tools"><span>Ortak kurulum · Linux / macOS</span><button class="copy js-only" type="button">Kopyala</button></div><pre tabindex="0"><code class="language-bash">python -m venv .venv
+source .venv/bin/activate
+python -m pip install qdrant-client==1.19.1</code></pre></div>
+<p class="run-note">Windows PowerShell için etkinleştirme komutu: <code>.\.venv\Scripts\Activate.ps1</code>. Paket kurulumu ve ikinci projedeki ilk model indirmesi internet gerektirir. HTML raporunun kendisi çevrimdışı okunabilir.</p>
+</section>
+
+<section class="section project" id="proje-1">
+<div class="section-head"><div class="section-n">01</div><div><div class="eyebrow">Temel API akışı · 6 saat</div><h2>İlk Qdrant sorgusunu çalıştırın</h2><p>Hedef: üç kayıt ekleyen, benzerlik sorgusu yapan ve yalnız seçilen kuruma ait kayıtları getiren bir Python dosyası.</p></div></div>
+<h3>Dört kavramı kod üzerinde öğrenin</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Qdrant temel kavramları"><table class="small-table"><thead><tr><th>Kavram</th><th>Bu örnekte neye karşılık geliyor?</th></tr></thead><tbody><tr><td><code>point</code></td><td>Kimliği, vektörü ve payload alanları bulunan tek kayıt.</td></tr><tr><td><code>vector</code></td><td>Benzerlik hesabına giren üç sayılık dizi.</td></tr><tr><td><code>payload</code></td><td><code>etiket</code> ve <code>tenant_id</code> gibi ilişkili JSON alanları.</td></tr><tr><td><code>collection</code></td><td>Bu kayıtları ve vektör yapılandırmasını tutan <code>ilk_arama</code> koleksiyonu.</td></tr></tbody></table></div>
+<p>Bir dense vektör alanındaki kayıtlar, tanımlanan boyuta ve uzaklık ölçütüne uymalıdır. Payload’a metin yazmak o metni otomatik olarak embedding’e dönüştürmez. <sup class="cite"><a href="#kaynak-3" aria-label="Kaynak 3">[3]</a></sup> <sup class="cite"><a href="#kaynak-4" aria-label="Kaynak 4">[4]</a></sup> <sup class="cite"><a href="#kaynak-5" aria-label="Kaynak 5">[5]</a></sup></p>
+<ol class="task-list">
+<li><strong>Koleksiyonu oluşturun.</strong><p>Boyutu üç, uzaklık ölçütünü cosine olarak belirleyin. İlk deneyde vektörleri elle vereceğiz.</p></li>
+<li><strong>Üç kayıt yükleyin.</strong><p>İki kayıt <code>alfa</code>, biri <code>beta</code> kurumuna ait olsun. Her kaydın kimliğini ve payload’ını inceleyin.</p></li>
+<li><strong>Sorguyu filtreyle çalıştırın.</strong><p><code>query_points</code> çağrısında hem sorgu vektörünü hem <code>tenant_id</code> koşulunu gönderin.</p></li>
+<li><strong>Sonucu açıklayın.</strong><p>Yüksek benzerliğe sahip bir kayıt farklı kurumda olduğunda neden gelmediğini gösterin.</p></li>
+</ol>
+<p>Aşağıdaki kodu <code>qdrant_micro_lab.py</code> olarak kaydedin ve <code>python qdrant_micro_lab.py</code> ile çalıştırın. Kullanılan API akışı resmî istemci ve hızlı başlangıç örneklerine dayanır. <sup class="cite"><a href="#kaynak-1" aria-label="Kaynak 1">[1]</a></sup> <sup class="cite"><a href="#kaynak-2" aria-label="Kaynak 2">[2]</a></sup></p>
+<details class="code-details"><summary><span>qdrant_micro_lab.py</span><span class="summary-hint">Kodu göster</span></summary><div class="code-box"><div class="code-tools"><span>qdrant_micro_lab.py</span><button class="copy js-only" type="button">Kopyala</button></div><pre tabindex="0"><code class="language-python">from qdrant_client import QdrantClient, models
+
+client = QdrantClient(&quot;:memory:&quot;)
+collection = &quot;ilk_arama&quot;
+client.create_collection(
+    collection_name=collection,
+    vectors_config=models.VectorParams(size=3, distance=models.Distance.COSINE),
+)
+
+# Bu vektörler öğretim için elle yazılmıştır; metin embedding&#x27;i değildir.
+client.upsert(
+    collection_name=collection,
+    wait=True,
+    points=[
+        models.PointStruct(
+            id=1, vector=[1.0, 0.0, 0.0],
+            payload={&quot;etiket&quot;: &quot;A yönü&quot;, &quot;tenant_id&quot;: &quot;alfa&quot;},
+        ),
+        models.PointStruct(
+            id=2, vector=[0.8, 0.6, 0.0],
+            payload={&quot;etiket&quot;: &quot;A&#x27;ya yakın&quot;, &quot;tenant_id&quot;: &quot;alfa&quot;},
+        ),
+        models.PointStruct(
+            id=3, vector=[1.0, 0.0, 0.0],
+            payload={&quot;etiket&quot;: &quot;Başka müşteri&quot;, &quot;tenant_id&quot;: &quot;beta&quot;},
+        ),
+    ],
+)
+scope = models.Filter(must=[
+    models.FieldCondition(key=&quot;tenant_id&quot;, match=models.MatchValue(value=&quot;alfa&quot;))
+])
+hits = client.query_points(
+    collection_name=collection,
+    query=[1.0, 0.0, 0.0],
+    query_filter=scope,
+    limit=2,
+    with_payload=True,
+).points
+
+for hit in hits:
+    print(hit.id, round(hit.score, 3), hit.payload[&quot;etiket&quot;])
+
+assert [hit.id for hit in hits] == [1, 2]
+assert all(hit.payload[&quot;tenant_id&quot;] == &quot;alfa&quot; for hit in hits)
+client.close()</code></pre></div></details>
+<h3>Beklenen çıktı</h3>
+<div class="expected"><pre><code>1 1.0 A yönü
+2 0.8 A'ya yakın</code></pre></div>
+<p>İlk kayıt sorguyla aynı yöndedir. İkinci kaydın cosine benzerliği 0,8’dir. Üçüncü kayıt farklı kuruma ait olduğu için dönmez. Buradaki skor bir doğruluk olasılığı değildir; vektörlerin yakınlığını gösterir.</p>
+<div class="note"><p><strong>Bu örneğin sınırı:</strong> Vektörler öğretim amacıyla elle yazıldı. Metinlerin anlamını temsil etmiyorlar. Gerçek metin aramasına ikinci projede geçeceksiniz.</p></div>
+<h3>Örneği genişletin</h3>
+<p><code>client.close()</code> satırından önce yeni deneyler ekleyin: filtreyi <code>beta</code> yapın; aynı point kimliğiyle vektörü veya etiketi güncelleyin; bir kaydı silip tekrar sorgulayın. Aynı kimlikle upsert mevcut kaydı günceller. Her deneyde kayıt sayısını ve dönen kimlikleri kontrol edin. <sup class="cite"><a href="#kaynak-3" aria-label="Kaynak 3">[3]</a></sup></p>
+<div class="deliverable"><strong>Teslimat</strong><span>Tek Python dosyası, üç açıklanmış sorgu sonucu ve güncelleme/silme deneyinin kısa notu.</span></div>
+<div class="checklist"><h3>Bu proje ne zaman tamamlanır?</h3><label><input type="checkbox" id="check-1-1"><span>Koleksiyon, point, vektör ve payload ilişkisini kod üzerinden açıklayabiliyorum.</span></label><label><input type="checkbox" id="check-1-2"><span>Kapsam dışındaki kayıt sonuçlara girmiyor; filtreyi değiştirince beklediğim kayıt geliyor.</span></label><label><input type="checkbox" id="check-1-3"><span>Aynı kimlikle güncellemeyi ve kaydı sildikten sonraki sorgu sonucunu gösterebiliyorum.</span></label></div>
+</section>
+
+<section class="section project" id="proje-2">
+<div class="section-head"><div class="section-n">02</div><div><div class="eyebrow">Gerçek metin ve embedding · 18 saat</div><h2>Türkçe destek belgelerinde arama kurun</h2><p>Hedef: bir soruya en yakın destek metinlerini kaynaklarıyla birlikte gösteren küçük bir arama uygulaması.</p></div></div>
+<p>Önce dört kurgusal metinle akışı kurun; sonra kullanım hakkınız olan 200–500 belge veya metin parçasına genişletin. İlk sürüm için komut satırı çıktısı yeterli. Ardından bir arama kutusu, sonuç listesi ve kaynak bağlantısı ekleyebilirsiniz.</p>
+<ol class="task-list">
+<li><strong>Belgeleri temizleyin ve bölün.</strong><p>Başlık ve paragraf sınırlarını koruyun. Menü, tekrar eden altbilgi ve boş sayfa gibi aramaya katkısı olmayan içerikleri ayıklayın. Her parçaya belge kimliği ve kaynak konumu ekleyin. <sup class="cite"><a href="#kaynak-6" aria-label="Kaynak 6">[6]</a></sup></p></li>
+<li><strong>Belge ve soru için aynı model düzenini kullanın.</strong><p>Modelin sorgu/belge öneklerine, girdi sınırına ve boyutuna uyun. Farklı modellerin çıktılarının birbirleriyle karşılaştırılabilir olduğunu varsaymayın.</p></li>
+<li><strong>Sonuçları kaynağıyla gösterin.</strong><p>Başlık, ilgili metin parçası ve belgenin konumunu birlikte sunun. Kullanıcı sonucun sorusuna gerçekten karşılık gelip gelmediğini görebilsin.</p></li>
+<li><strong>50 soruluk bir değerlendirme kümesi hazırlayın.</strong><p>Eş anlamlı ifadeler, Türkçe karakterler, yazım hataları, ürün kodları ve belgelerde yanıtı bulunmayan sorular bulunsun. Hangi kayıtların ilgili olduğunu insan incelemesiyle belirleyin.</p></li>
+</ol>
+<h3>İlk gerçek embedding örneği</h3>
+<p><code>intfloat/multilingual-e5-small</code> bu deney için bir model adayıdır. Model kartı 384 boyutlu çıktı ve 512 token girdi sınırı belirtir. Belgelere <code>passage: </code>, sorulara <code>query: </code> öneki eklenir; Türkçe metinlerde de bu önekler İngilizce yazılır. <sup class="cite"><a href="#kaynak-7" aria-label="Kaynak 7">[7]</a></sup></p>
+<p>Kod boyut sayısını üretilen vektörlerden alır. <code>normalize_embeddings=True</code> ile normalize edilen çıktılar Qdrant’a gönderilir. Bu modelin sizin veri kümenizdeki başarısını aşağıdaki değerlendirme adımlarıyla ölçün. <sup class="cite"><a href="#kaynak-8" aria-label="Kaynak 8">[8]</a></sup></p>
+<div class="code-box"><div class="code-tools"><span>Gerçek embedding örneğini çalıştırma</span><button class="copy js-only" type="button">Kopyala</button></div><pre tabindex="0"><code class="language-bash">python -m pip install sentence-transformers qdrant-client==1.19.1
+python qdrant_semantic_example.py</code></pre></div>
+<p>Kodu <code>qdrant_semantic_example.py</code> adıyla kaydedin. <code>demo/...</code> kaynakları kurgusal etiketlerdir. İlk çalıştırmada model dosyaları indirilir; sonradan denediğiniz paket sürümlerini ve model revizyonunu çalışma notunuza ekleyin.</p>
+<details class="code-details"><summary><span>qdrant_semantic_example.py</span><span class="summary-hint">Kodu göster</span></summary><div class="code-box"><div class="code-tools"><span>qdrant_semantic_example.py</span><button class="copy js-only" type="button">Kopyala</button></div><pre tabindex="0"><code class="language-python">from sentence_transformers import SentenceTransformer
+from qdrant_client import QdrantClient, models
+
+# İlk çalıştırmada model dosyaları indirilir.
+model = SentenceTransformer(&quot;intfloat/multilingual-e5-small&quot;, device=&quot;cpu&quot;)
+docs = [
+    (&quot;Parolanızı unuttuysanız Parolamı unuttum bağlantısını kullanın.&quot;, &quot;demo/parola&quot;),
+    (&quot;Kargonuzun durumunu Siparişlerim bölümünden takip edebilirsiniz.&quot;, &quot;demo/kargo&quot;),
+    (&quot;Faturanızı sipariş ayrıntılarındaki Faturayı indir düğmesinden alın.&quot;, &quot;demo/fatura&quot;),
+    (&quot;İade talebini sipariş ayrıntılarındaki İade başlat seçeneğinden oluşturun.&quot;, &quot;demo/iade&quot;),
+]
+vectors = model.encode(
+    [&quot;passage: &quot; + text for text, _ in docs],
+    batch_size=4,
+    normalize_embeddings=True,
+)
+dimension = int(vectors.shape[1])
+client = QdrantClient(&quot;:memory:&quot;)
+client.create_collection(
+    collection_name=&quot;turkce_destek&quot;,
+    vectors_config=models.VectorParams(size=dimension, distance=models.Distance.COSINE),
+)
+client.upsert(
+    collection_name=&quot;turkce_destek&quot;,
+    wait=True,
+    points=[
+        models.PointStruct(
+            id=i,
+            vector=vector.tolist(),
+            payload={&quot;text&quot;: text, &quot;source&quot;: source, &quot;language&quot;: &quot;tr&quot;},
+        )
+        for i, ((text, source), vector) in enumerate(zip(docs, vectors), start=1)
+    ],
+)
+question = &quot;Paketimin nerede olduğunu nasıl öğrenebilirim?&quot;
+query_vector = model.encode(&quot;query: &quot; + question, normalize_embeddings=True)
+hits = client.query_points(
+    collection_name=&quot;turkce_destek&quot;,
+    query=query_vector.tolist(),
+    limit=2,
+    with_payload=True,
+).points
+
+print(&quot;Embedding boyutu:&quot;, dimension)
+for hit in hits:
+    print(round(hit.score, 3), hit.payload[&quot;source&quot;], hit.payload[&quot;text&quot;])
+client.close()</code></pre></div></details>
+<div class="note"><p><strong>Beklenen davranış:</strong> Program embedding boyutunu ve en yakın iki kaydı yazdırır. Kargo sorusunda kargo belgesinin üst sıralarda olup olmadığını gözleyin; belirli bir skor veya sıralama burada ölçülmüş sonuç olarak sunulmaz.</p></div>
+<h3>Küçük örneği gerçek projeye dönüştürün</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Türkçe arama projesinin genişletme görevleri"><table><thead><tr><th>Görev</th><th>Uygulama</th><th>Kontrol</th></tr></thead><tbody>
+<tr><td>Dosyadan veri alma</td><td>Metinleri bir klasörden veya JSONL dosyasından okuyun.</td><td>Boş, yinelenen ve okunamayan dosyaları raporlayın.</td></tr>
+<tr><td>Parçalama</td><td>Önce paragraf temelli bir yöntem, sonra farklı parça boyutu deneyin.</td><td>Aynı sorularda kaybolan bağlamı ve tekrar eden sonuçları inceleyin.</td></tr>
+<tr><td>Kaynak gösterimi</td><td>Belge adı, parça numarası ve kaynak konumunu saklayın.</td><td>Her arama sonucundan doğru metne ulaşılabildiğini doğrulayın.</td></tr>
+<tr><td>Arama arayüzü</td><td>Sorgu kutusu, sonuç sayısı ve kaynaklı sonuç kartları ekleyin.</td><td>Boş sorguyu ve yararsız sonuçları anlaşılır biçimde gösterin.</td></tr>
+<tr><td>Karşılaştırma</td><td>Bir model veya parçalama kararını değiştirin.</td><td>Diğer değişkenleri sabit tutarak 50 soruda önce/sonra sonuçlarını kaydedin.</td></tr>
+</tbody></table></div>
+<p>Benzerlik eşiğini birkaç olumlu örneğe bakarak seçmeyin. Yanıtı belgelerde bulunmayan ve birbirine benzese de farklı cevap isteyen soruları da deneyin. Uygulama gerektiğinde “Uygun bir sonuç bulunamadı” diyebilmeli.</p>
+<div class="deliverable"><strong>Teslimat</strong><span>Türkçe arama uygulaması, kaynaklı veri kümesi, 50 etiketli soru ve en az bir karşılaştırmalı deney.</span></div>
+<div class="checklist"><h3>Bu proje ne zaman tamamlanır?</h3><label><input type="checkbox" id="check-2-1"><span>Kendi verimi yükleyip yeni Türkçe sorularla arama yapabiliyorum.</span></label><label><input type="checkbox" id="check-2-2"><span>Her sonuç doğru kaynak metne bağlanıyor; parçalama sırasında kaynak bilgisi kaybolmuyor.</span></label><label><input type="checkbox" id="check-2-3"><span>En az bir değişikliği aynı soru kümesinde karşılaştırdım ve başarısız örnekleri açıkladım.</span></label></div>
+</section>
+
+<section class="section project" id="proje-3">
+<div class="section-head"><div class="section-n">03</div><div><div class="eyebrow">Aramayı ürüne dönüştürme · 32 saat</div><h2>Yetki kontrollü hibrit arama geliştirin</h2><p>Hedef: iki örnek kuruma ve erişim gruplarına göre çalışan, güncellenebilen ve arama kalitesi ölçülen bir destek arama MVP’si.</p></div></div>
+<p>İkinci projenin veri alma ve dense arama akışını koruyun. Bu kez 2.000–10.000 metin parçası, iki kurum ve kurum başına iki erişim grubu üzerinde çalışın. Bu sayılar önerilen proje kapsamıdır.</p>
+<h3>Önce veri sözleşmesini belirleyin</h3>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Önerilen payload sözleşmesi"><table><thead><tr><th>Alan</th><th>Örnek</th><th>Neden gerekli?</th></tr></thead><tbody>
+<tr><td><code>tenant_id</code></td><td><code>alfa</code></td><td>Kaydın ait olduğu kurumu belirler.</td></tr>
+<tr><td><code>allowed_groups</code></td><td><code>["destek"]</code></td><td>İçeriği okuyabilen grupları tutar.</td></tr>
+<tr><td><code>doc_id</code>, <code>chunk_no</code></td><td><code>iade-01</code>, <code>3</code></td><td>Parçayı kaynak belgeyle eşler.</td></tr>
+<tr><td><code>revision</code>, <code>updated_at</code></td><td><code>4</code>, tarih/saat</td><td>Güncelleme sırasını ve veri güncelliğini izlemeyi sağlar.</td></tr>
+<tr><td><code>text</code>, <code>source_uri</code></td><td>Parça metni, belge konumu</td><td>Sonucu gösterme ve kaynağı açma için kullanılır.</td></tr>
+<tr><td><code>language</code>, <code>embedding_model</code></td><td><code>tr</code>, model kimliği</td><td>Verinin hangi dil ve modelle işlendiğini kaydeder.</td></tr>
+</tbody></table></div>
+<p>Bu sözleşme bir uygulama önerisidir. Filtrelenecek alanların veri tiplerini ve indekslerini birlikte seçin; erişim bilgilerini belge metnine rastgele eklemeyin. <sup class="cite"><a href="#kaynak-5" aria-label="Kaynak 5">[5]</a></sup> <sup class="cite"><a href="#kaynak-11" aria-label="Kaynak 11">[11]</a></sup></p>
+<h3>Dense, sparse ve hibrit aramayı karşılaştırın</h3>
+<p><strong>Dense</strong> arama embedding modelinin öğrendiği yakınlıkları kullanır. <strong>Sparse</strong> temsil az sayıda sıfır olmayan bileşenden oluşur; BM25 gibi sözcüksel yöntemler veya öğrenilmiş sparse modeller kullanılabilir. Ürün kodu, kısaltma ve doğal dil sorgularını ayrı gruplarda değerlendirin. <sup class="cite"><a href="#kaynak-15" aria-label="Kaynak 15">[15]</a></sup></p>
+<p><strong>Hibrit</strong> sorguda iki <code>Prefetch</code>, <code>dense</code> ve <code>sparse</code> alanlarından aday getirir. RRF bu listeleri sıra konumlarına göre birleştirir. İlk aday listelerine hiç girmeyen bir belge bu adımda bulunamaz; aday sayısını kalite ve gecikmeyi birlikte ölçerek seçin. <sup class="cite"><a href="#kaynak-9" aria-label="Kaynak 9">[9]</a></sup></p>
+<p>Aşağıdaki bağımsız laboratuvarı <code>qdrant_hybrid_lab.py</code> adıyla kaydedip <code>python qdrant_hybrid_lab.py</code> komutuyla çalıştırın. Vektörler sentetiktir. Tam projede dense değerleri ikinci projedeki modelden, sparse değerleri seçtiğiniz ve Türkçe sorularda değerlendirdiğiniz yöntemden üretin.</p>
+<p>Gerçek embedding’lere geçtiğinizde <code>dense</code> alanının <code>size</code> değerini modelin çıktı boyutuna göre değiştirin; ikinci projedeki model için bu değer 384’tür. Yeni şemayla ayrı bir koleksiyon oluşturup veriyi yükleyin. <sup class="cite"><a href="#kaynak-4" aria-label="Kaynak 4">[4]</a></sup> <sup class="cite"><a href="#kaynak-7" aria-label="Kaynak 7">[7]</a></sup></p>
+<details class="code-details"><summary><span>qdrant_hybrid_lab.py</span><span class="summary-hint">Kodu göster</span></summary><div class="code-box"><div class="code-tools"><span>qdrant_hybrid_lab.py</span><button class="copy js-only" type="button">Kopyala</button></div><pre tabindex="0"><code class="language-python">from qdrant_client import QdrantClient, models
+
+client = QdrantClient(&quot;:memory:&quot;)
+collection = &quot;hibrit_lab&quot;
+client.create_collection(
+    collection_name=collection,
+    vectors_config={
+        &quot;dense&quot;: models.VectorParams(size=3, distance=models.Distance.COSINE)
+    },
+    sparse_vectors_config={&quot;sparse&quot;: models.SparseVectorParams()},
+)
+
+# Üründe bu bilgiler sunucunun doğruladığı oturumdan gelir.
+tenant_id = &quot;alfa&quot;
+user_groups = [&quot;destek&quot;]
+if not tenant_id or not user_groups:
+    raise PermissionError(&quot;Doğrulanmış tenant ve erişim grubu gerekli.&quot;)
+scope = models.Filter(must=[
+    models.FieldCondition(key=&quot;tenant_id&quot;, match=models.MatchValue(value=tenant_id)),
+    models.FieldCondition(key=&quot;allowed_groups&quot;, match=models.MatchAny(any=user_groups)),
+])
+
+# Dense ve sparse değerler sentetiktir; bu laboratuvar API akışını gösterir.
+rows = [
+    (1, [1.0, 0.0, 0.0], [101, 205], [1.0, 0.5], &quot;alfa&quot;, [&quot;destek&quot;]),
+    (2, [0.8, 0.6, 0.0], [205], [1.0], &quot;alfa&quot;, [&quot;destek&quot;]),
+    (3, [1.0, 0.0, 0.0], [101], [1.0], &quot;beta&quot;, [&quot;destek&quot;]),
+    (4, [1.0, 0.0, 0.0], [101], [1.0], &quot;alfa&quot;, [&quot;finans&quot;]),
+]
+client.upsert(
+    collection_name=collection,
+    wait=True,
+    points=[
+        models.PointStruct(
+            id=point_id,
+            vector={
+                &quot;dense&quot;: dense,
+                &quot;sparse&quot;: models.SparseVector(indices=indices, values=values),
+            },
+            payload={&quot;tenant_id&quot;: tenant, &quot;allowed_groups&quot;: groups},
+        )
+        for point_id, dense, indices, values, tenant, groups in rows
+    ],
+)
+hits = client.query_points(
+    collection_name=collection,
+    prefetch=[
+        models.Prefetch(
+            query=[1.0, 0.0, 0.0], using=&quot;dense&quot;, filter=scope, limit=20,
+        ),
+        models.Prefetch(
+            query=models.SparseVector(indices=[101], values=[1.0]),
+            using=&quot;sparse&quot;, filter=scope, limit=20,
+        ),
+    ],
+    query=models.FusionQuery(fusion=models.Fusion.RRF),
+    query_filter=scope,
+    limit=10,
+    with_payload=True,
+).points
+
+print(&quot;Dönen kayıtlar:&quot;, [hit.id for hit in hits])
+assert hits[0].id == 1
+assert {hit.id for hit in hits} == {1, 2}
+assert all(hit.payload[&quot;tenant_id&quot;] == tenant_id for hit in hits)
+assert all(set(hit.payload[&quot;allowed_groups&quot;]) &amp; set(user_groups) for hit in hits)
+client.close()</code></pre></div></details>
+<h4>Beklenen çıktı</h4>
+<div class="expected"><pre><code>Dönen kayıtlar: [1, 2]</code></pre></div>
+<p>Üçüncü kayıt başka kuruma, dördüncü kayıt izin verilmeyen gruba aittir. Kapsam filtresi iki prefetch içinde ve ana sorguda bulunur. <code>MatchAny</code>, kullanıcının gruplarıyla kayıt üzerindeki grupların eşleşmesini kontrol eder. <sup class="cite"><a href="#kaynak-10" aria-label="Kaynak 10">[10]</a></sup></p>
+<h3>Arama akışını uygulama API’sine bağlayın</h3>
+<ol class="task-list">
+<li><strong>Kimliği ve kapsamı sunucuda belirleyin.</strong><p>Tenant ve grup bilgilerini doğrulanmış oturumdan çıkarın. Kullanıcının serbestçe gönderdiği kurum değerine güvenmeyin; kapsam yoksa isteği reddedin.</p></li>
+<li><strong>İki sorgu temsilini üretin.</strong><p>Belge ve sorunun aynı model düzenini kullanmasını sağlayın. Önce yalnız dense, sonra yalnız sparse, ardından hibrit yöntemi çalıştırın.</p></li>
+<li><strong>Sonuçları sınırlı alanlarla döndürün.</strong><p>Başlık, ilgili parça ve kaynak konumunu gösterin. Kaynağı açarken de erişim kontrolünü uygulayın.</p></li>
+<li><strong>Aynı kapsamı bütün okuma yollarında koruyun.</strong><p>Arama yanında kimlikle kayıt getirme ve kaynak indirme yollarını da deneyin. Filtreleme, uygulamanın kimlik doğrulama ve yetkilendirme kararının yerini almaz.</p></li>
+<li><strong>Güncelleme ve silmeyi tamamlayın.</strong><p>Belge değiştiğinde yeni parçaları yükleyin ve artık bulunmayan parçaları kaldırın. Aynı işi tekrar çalıştırınca kopya kayıt oluşmamasını sağlayın. Eski bir olayın yeni revizyonun üzerine yazmasını uygulamada önleyin. <sup class="cite"><a href="#kaynak-3" aria-label="Kaynak 3">[3]</a></sup></p></li>
+</ol>
+<div class="table-wrap" tabindex="0" role="region" aria-label="MVP arayüz ve API görevleri"><table><thead><tr><th>Uygulama parçası</th><th>Yapılacak iş</th><th>Beklenen sonuç</th></tr></thead><tbody>
+<tr><td><code>POST /search</code></td><td>Soru ve sonuç sayısı alınır; kapsam oturumdan türetilir.</td><td>Yalnız izin verilen metin parçaları ve kaynaklar döner.</td></tr>
+<tr><td><code>GET /documents/{doc_id}</code></td><td>Belgeyi açmadan önce kurum ve erişim koşulları doğrulanır.</td><td>Arama sonucunu atlayarak yetkisiz belgeye ulaşılamaz.</td></tr>
+<tr><td>Veri yükleme komutu</td><td>Kimlik, revizyon, güncelleme ve silme işlemleri kaydedilir.</td><td>Tekrar çalıştırılabilir, izlenebilir veri akışı oluşur.</td></tr>
+<tr><td>Arama ekranı</td><td>Sorgu, sonuç listesi, kaynak ve boş sonuç durumu gösterilir.</td><td>Kullanıcı bulunan içeriği doğrulayabilir.</td></tr>
+</tbody></table></div>
+<p class="run-note">Bu tablo, tamamlayacağınız uygulama görevlerini tanımlar. Kod laboratuvarı Qdrant sorgusunu içerir; HTTP uç noktalarını, kimlik doğrulamayı ve arayüzü kendi uygulamanızda ekleyeceksiniz.</p>
+<h3>Sunucu ve payload indekslerini deneyin</h3>
+<p>MVP’yi ayrı Qdrant sunucusunda çalıştırmak istediğinizde aşağıdaki yerel Docker kurulumu kullanılabilir. REST portu yalnız yerel makineye açılır; veri adlandırılmış volume’da kalır. Sunucu bağlantısı <code>QdrantClient(url="http://localhost:6333")</code> olur. <sup class="cite"><a href="#kaynak-2" aria-label="Kaynak 2">[2]</a></sup></p>
+<div class="code-box"><div class="code-tools"><span>İsteğe bağlı sunucu kurulumu</span><button class="copy js-only" type="button">Kopyala</button></div><pre tabindex="0"><code class="language-bash">docker volume create qdrant_proje
+docker run --rm --name qdrant-proje \
+  -p 127.0.0.1:6333:6333 \
+  -v qdrant_proje:/qdrant/storage \
+  qdrant/qdrant:v1.19.2</code></pre></div>
+<p><code>tenant_id</code> ve <code>allowed_groups</code> alanlarına uygun indeksleri, koleksiyon oluşturulduktan sonra ekleyin. <code>is_tenant=True</code> sorgu ve saklama düzenine yardımcı olur; kullanıcı yetkisi tanımlamaz. <sup class="cite"><a href="#kaynak-11" aria-label="Kaynak 11">[11]</a></sup></p>
+<details class="code-details"><summary><span>Payload indeksleri · sunucu kesiti</span><span class="summary-hint">Kodu göster</span></summary><div class="code-box"><div class="code-tools"><span>Payload indeksleri · sunucu kesiti</span><button class="copy js-only" type="button">Kopyala</button></div><pre tabindex="0"><code class="language-python"># Sunucu modunda, koleksiyon oluşturulduktan sonra uygulanır.
+# client ve collection değişkenleri önceden tanımlı olmalıdır.
+from qdrant_client import models
+
+client.create_payload_index(
+    collection_name=collection,
+    field_name=&quot;tenant_id&quot;,
+    field_schema=models.KeywordIndexParams(
+        type=models.KeywordIndexType.KEYWORD,
+        is_tenant=True,
+    ),
+    wait=True,
+)
+client.create_payload_index(
+    collection_name=collection,
+    field_name=&quot;allowed_groups&quot;,
+    field_schema=models.PayloadSchemaType.KEYWORD,
+    wait=True,
+)</code></pre></div></details>
+<p class="run-note">Bu kesit bağımsız program değildir; sunucuya bağlı <code>client</code> ve oluşturulmuş <code>collection</code> gerekir. Aynı koleksiyonu yeniden açmadan önce varlığını kontrol edin. Yerel Python modundaki sonuçlardan sunucu indeks performansı çıkarılamaz. Uygulamayı başka kullanıcıların erişimine açarken API anahtarı, TLS ve ağ erişimini yapılandırın. <sup class="cite"><a href="#kaynak-1" aria-label="Kaynak 1">[1]</a></sup> <sup class="cite"><a href="#kaynak-14" aria-label="Kaynak 14">[14]</a></sup></p>
+<h3>Kaliteyi ve gecikmeyi ölçün</h3>
+<p>İkinci projedeki 50 soruyu yaklaşık 200 etiketli sorguya genişletin. Ayar yapmak için kullandığınız sorulardan ayrı bir son test kümesi tutun. Dense, sparse ve hibrit yöntemleri aynı veri, soru ve filtre koşullarında karşılaştırın. <sup class="cite"><a href="#kaynak-12" aria-label="Kaynak 12">[12]</a></sup></p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Arama ürününün ölçüm planı"><table><thead><tr><th>Ölçüm</th><th>Nasıl yorumlanır?</th><th>Projede kaydedilecek bilgi</th></tr></thead><tbody>
+<tr><td>Recall@k</td><td>İlgili kayıtların ne kadarı ilk k sonuçta bulundu?</td><td>İlgili kaydı bulunan doğal dil ve kod/kısaltma sorguları için ayrı sonuçlar.</td></tr>
+<tr><td>nDCG@k veya MRR</td><td>Yararlı kayıtlar üst sıralarda mı?</td><td>Üç yöntemin aynı sorgular üzerindeki sıralama karşılaştırması.</td></tr>
+<tr><td>p95 gecikme</td><td>Ölçülen isteklerin %95’i hangi sürede tamamlandı?</td><td>Qdrant süresi ve embedding/ağ dahil toplam API süresi.</td></tr>
+<tr><td>Veri güncelliği</td><td>Değişen veya silinen belge ne zaman sonuçlara yansıdı?</td><td>Güncelleme/silme olayı ile sorgu sonucu arasındaki süre.</td></tr>
+<tr><td>Erişim testleri</td><td>Kapsam dışındaki kayıt getirilebiliyor mu?</td><td>Başka kurum, yanlış grup, eksik kapsam ve kaldırılmış izin senaryoları.</td></tr>
+</tbody></table></div>
+<p><strong>Kısa hesap:</strong> İlgili dört kayıttan üçü ilk beş sonuçta bulunuyorsa Recall@5 = 3/4 = %75 olur. Aynı durumda Precision@5 = 3/5 = %60’tır. Bu etiketler kullanıcı açısından uygunluğu ölçer. ANN recall ise yaklaşık aramanın aynı vektörlerdeki tam aramaya ne kadar yaklaştığını gösterir; aynı ölçüm değildir. <sup class="cite"><a href="#kaynak-12" aria-label="Kaynak 12">[12]</a></sup> <sup class="cite"><a href="#kaynak-13" aria-label="Kaynak 13">[13]</a></sup></p>
+<p>Belgelerde yanıtı bulunmayan soruları ayrı değerlendirin: uygulamanın ilgisiz sonuç gösterme ve doğru biçimde “Uygun sonuç bulunamadı” deme oranlarını kaydedin. İlgili kayıt sayısı sıfır olan sorularda Recall hesabını kullanmayın.</p>
+<p>Hibrit yöntemin her sorguda daha iyi olacağını varsaymayın. Başarısız örnekleri veri, parçalama, temsil, filtre ve sıralama olarak ayırın. Gerekiyorsa ilk aramada bulunan adayları yeniden sıralayan bir reranker’ı ayrı deney olarak ekleyin; önce mevcut yaklaşımın ölçümünü tamamlayın.</p>
+<div class="deliverable"><strong>Teslimat</strong><span>Kaynak gösteren arama MVP’si, veri yükleme komutu, erişim testleri, üç yöntemli kalite karşılaştırması ve çalıştırma yönergesi.</span></div>
+<div class="checklist"><h3>Bu proje ne zaman tamamlanır?</h3><label><input type="checkbox" id="check-3-1"><span>Dense, sparse ve hibrit yöntemleri aynı sorularda karşılaştırdım; seçimin gerekçesini yazdım.</span></label><label><input type="checkbox" id="check-3-2"><span>Başka kurum, yanlış grup ve eksik kapsam testlerinde yetkisiz kayıt dönmüyor.</span></label><label><input type="checkbox" id="check-3-3"><span>Güncelleme ve silme hem arama hem doğrudan belge okuma yoluna yansıyor.</span></label><label><input type="checkbox" id="check-3-4"><span>Veri/model sürümleriyle birlikte kaliteyi, p95 gecikmeyi ve başarısız sorguları kaydettim.</span></label></div>
+</section>
+
+<section class="section" id="plan">
+<h2>7 haftalık çalışma planı</h2>
+<p>Haftada 8 saat ayırdığınızda toplam süre 56 saat olur. İlk hafta birinci projeyi tamamlayıp ikinci projeye başlarsınız. Süreler, temel Python bilgisi olan biri için öneridir.</p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Yedi haftalık proje çalışma planı"><table><thead><tr><th>Hafta</th><th>Dağılım</th><th>Somut çıktı</th></tr></thead><tbody>
+<tr><td>1</td><td>Proje 1: 6 saat · Proje 2: 2 saat</td><td>İlk sorgu, güncelleme/silme deneyi ve Türkçe örnek veri.</td></tr>
+<tr><td>2</td><td>Proje 2: 8 saat</td><td>Veri yükleme, parçalama, embedding ve kaynaklı arama.</td></tr>
+<tr><td>3</td><td>Proje 2: 8 saat</td><td>50 etiketli soru, bir karşılaştırmalı deney ve küçük arama ekranı.</td></tr>
+<tr><td>4</td><td>Proje 3: 8 saat</td><td>Payload sözleşmesi, kalıcı kimlikler ve tekrar çalıştırılabilen veri akışı.</td></tr>
+<tr><td>5</td><td>Proje 3: 8 saat</td><td>Dense/sparse/hibrit sorgular, indeksler ve tenant/grup kapsamı.</td></tr>
+<tr><td>6</td><td>Proje 3: 8 saat</td><td>Genişletilmiş sorgu kümesi, hata analizi ve yöntem karşılaştırması.</td></tr>
+<tr><td>7</td><td>Proje 3: 8 saat</td><td>API ve ekranın tamamlanması, erişim testleri, gecikme ölçümü ve demo.</td></tr>
+</tbody></table></div>
+<h3>Son teslimi başka birinin çalıştırmasını sağlayın</h3>
+<p>Proje klasörünü verdiğiniz kişi; kurulum yönergesini izleyerek veriyi yükleyebilmeli, örnek sorguları çalıştırabilmeli ve sonuçların kaynağını açabilmeli. Son notunuzda seçtiğiniz model ve arama yöntemini, ölçtüğünüz sonuçları ve çözülmemiş en önemli üç sorunu açıklayın.</p>
+<p class="progress-note" id="progress-note">Tamamlanma kutularını ilerledikçe işaretleyebilirsiniz.</p>
+</section>
+
+<section class="section" id="kaynaklar">
+<h2>Kaynaklar ve örneklerin kapsamı</h2>
+<p class="small muted">Bu sürüm, önceki raporun 19 Ekim 2026 tarihli teknik araştırmasını proje geliştirme odağında yeniden düzenler. Kapsam ve görünüm 9 Kasım 2026’da sadeleştirildi. Sürüm numaraları örnek ortamı tanımlar; güncel sürüm iddiası taşımaz.</p>
+<p class="small muted">Kodlar bu düzenlemede yeniden yazıldı; örnekler çalıştırılmadı, yalnızca Python sözdizimleri kontrol edildi. İlk ve üçüncü örnekler sentetik vektörlerle API akışını; ikinci örnek model indirmesi gerektiren gerçek metin aramasını gösterir. Başarı hedefleri ve süreler bu rehberin proje önerileridir.</p>
+<ol class="sources"><li id="kaynak-1"><span class="source-n">1</span><div><a href="https://github.com/qdrant/qdrant-client" target="_blank" rel="noopener noreferrer">Python Qdrant Client</a><p>Yerel çalışma modu ve Python istemcisi.</p></div></li>
+<li id="kaynak-2"><span class="source-n">2</span><div><a href="https://qdrant.tech/documentation/quickstart/" target="_blank" rel="noopener noreferrer">Local Quickstart</a><p>Sunucu, koleksiyon, veri yükleme ve ilk sorgu.</p></div></li>
+<li id="kaynak-3"><span class="source-n">3</span><div><a href="https://qdrant.tech/documentation/manage-data/points/" target="_blank" rel="noopener noreferrer">Points</a><p>Kayıt kimlikleri, upsert, güncelleme ve silme.</p></div></li>
+<li id="kaynak-4"><span class="source-n">4</span><div><a href="https://qdrant.tech/documentation/manage-data/collections/" target="_blank" rel="noopener noreferrer">Collections</a><p>Vektör boyutları, uzaklık ölçütleri ve named vectors.</p></div></li>
+<li id="kaynak-5"><span class="source-n">5</span><div><a href="https://qdrant.tech/documentation/manage-data/payload/" target="_blank" rel="noopener noreferrer">Payload</a><p>Metaveri alanları ve veri tipleri.</p></div></li>
+<li id="kaynak-6"><span class="source-n">6</span><div><a href="https://qdrant.tech/course/essentials/day-1/chunking-strategies/" target="_blank" rel="noopener noreferrer">Text Chunking Strategies</a><p>Metinleri aramaya uygun parçalara ayırma.</p></div></li>
+<li id="kaynak-7"><span class="source-n">7</span><div><a href="https://huggingface.co/intfloat/multilingual-e5-small" target="_blank" rel="noopener noreferrer">Multilingual E5 Small — model kartı</a><p>384 boyut, sorgu/belge önekleri ve 512 token sınırı.</p></div></li>
+<li id="kaynak-8"><span class="source-n">8</span><div><a href="https://sbert.net/docs/package_reference/sentence_transformer/model.html" target="_blank" rel="noopener noreferrer">SentenceTransformer API</a><p>Embedding üretimi ve normalize edilmiş çıktılar.</p></div></li>
+<li id="kaynak-9"><span class="source-n">9</span><div><a href="https://qdrant.tech/documentation/search/hybrid-queries/" target="_blank" rel="noopener noreferrer">Hybrid and Multi-Stage Queries</a><p>Prefetch, named vectors ve sonuç birleştirme.</p></div></li>
+<li id="kaynak-10"><span class="source-n">10</span><div><a href="https://qdrant.tech/documentation/search/filtering/" target="_blank" rel="noopener noreferrer">Filtering</a><p>Filtre koşulları, MatchValue ve MatchAny.</p></div></li>
+<li id="kaynak-11"><span class="source-n">11</span><div><a href="https://qdrant.tech/documentation/manage-data/indexing/" target="_blank" rel="noopener noreferrer">Indexing</a><p>Payload ve tenant indeksleri.</p></div></li>
+<li id="kaynak-12"><span class="source-n">12</span><div><a href="https://qdrant.tech/documentation/search-evaluation/retrieval-relevance/" target="_blank" rel="noopener noreferrer">Measuring Retrieval Relevance</a><p>Etiketli sorgular; Recall, Precision, MRR ve nDCG.</p></div></li>
+<li id="kaynak-13"><span class="source-n">13</span><div><a href="https://qdrant.tech/documentation/tutorials-search-engineering/ann-recall/" target="_blank" rel="noopener noreferrer">Measuring ANN Recall</a><p>Yaklaşık arama ile tam aramanın karşılaştırılması.</p></div></li>
+<li id="kaynak-14"><span class="source-n">14</span><div><a href="https://qdrant.tech/documentation/tutorials-operations/secure-qdrant/" target="_blank" rel="noopener noreferrer">Secure a Self-Hosted Qdrant Instance</a><p>Ağ erişimi, API anahtarları ve TLS.</p></div></li>
+<li id="kaynak-15"><span class="source-n">15</span><div><a href="https://qdrant.tech/documentation/manage-data/vectors/" target="_blank" rel="noopener noreferrer">Vectors</a><p>Dense, sparse ve named vector yapıları.</p></div></li></ol>
+</section>
+<footer class="footer"><p>Qdrant · Proje odaklı öğrenme<br>3 proje · 56 saat · 7 hafta</p><p>9 Kasım 2026<br><a href="#baslangic">Başa dön ↑</a></p></footer>
+</main>
+<script>
+(() => {
+  'use strict';
+  document.documentElement.classList.add('has-js');
+  const all = selector => Array.from(document.querySelectorAll(selector));
+  const key = 'qdrant-project-learning-20261109';
+  let saved = {};
+  let storageWorks = true;
+  try { const value = JSON.parse(localStorage.getItem(key) || '{}'); if (value && typeof value === 'object') saved = value; }
+  catch (error) { storageWorks = false; }
+  function updateProgressNote() {
+    const boxes = all('.checklist input');
+    const count = boxes.filter(input => input.checked).length;
+    document.querySelector('#progress-note').textContent = count + ' / ' + boxes.length + ' tamamlanma ölçütü işaretlendi.' + (storageWorks ? ' İşaretler bu tarayıcıda tutulur.' : ' İşaretler bu oturumda kullanılabilir.');
+  }
+  all('.checklist input').forEach(input => {
+    input.checked = !!saved[input.id];
+    input.addEventListener('change', () => {
+      saved[input.id] = input.checked;
+      try { localStorage.setItem(key, JSON.stringify(saved)); }
+      catch (error) { storageWorks = false; }
+      updateProgressNote();
+    });
+  });
+  updateProgressNote();
+  all('.copy').forEach(button => button.addEventListener('click', async () => {
+    const code = button.closest('.code-box').querySelector('code').textContent;
+    let copied = false;
+    try { await navigator.clipboard.writeText(code); copied = true; }
+    catch (error) {
+      const area = document.createElement('textarea');
+      area.value = code;
+      area.style.position = 'fixed';
+      area.style.left = '-10000px';
+      document.body.appendChild(area);
+      area.select();
+      try { copied = document.execCommand('copy'); } catch (error) {}
+      area.remove();
+    }
+    button.textContent = copied ? 'Kopyalandı' : 'Kodu seçin';
+    setTimeout(() => { button.textContent = 'Kopyala'; }, 1800);
+  }));
+  let printState = null;
+  function preparePrint() {
+    if (printState) return;
+    printState = all('.code-details').map(element => ({ element, open: element.open }));
+    printState.forEach(item => { item.element.open = true; });
+  }
+  function restorePrint() {
+    if (!printState) return;
+    printState.forEach(item => { item.element.open = item.open; });
+    printState = null;
+  }
+  addEventListener('beforeprint', preparePrint);
+  addEventListener('afterprint', restorePrint);
+  document.querySelector('#print-report').addEventListener('click', () => { preparePrint(); window.print(); });
+})();
+</script>
+</body>
+</html>
