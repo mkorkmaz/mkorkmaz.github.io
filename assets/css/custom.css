@@ -11,6 +11,25 @@
 	width: 24px;
 }
 
+.profile .profile-avatar {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.profile #avatar {
+	display: block;
+	margin-bottom: 0;
+	border-radius: 0;
+	object-fit: cover;
+	object-position: center top;
+	transform: scale(1.6);
+	transform-origin: 95% 52%;
+}
+
 #post-list ul {
   list-style: none;
    list-style-type: none;
